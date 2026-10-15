@@ -1,0 +1,30 @@
+# Cloudflare Pages headers.
+# https://developers.cloudflare.com/pages/configuration/headers/
+
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: SAMEORIGIN
+  Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=(), usb=()
+
+# Assets and data files have no content hash in their filename, so they must
+# revalidate. A long immutable cache here would serve stale CSS/JS after a
+# redeploy with no way for a returning visitor to pick up the fix.
+/assets/*
+  Cache-Control: public, max-age=3600, must-revalidate
+
+/data/*
+  Cache-Control: public, max-age=3600, must-revalidate
+
+# The service worker must never be cached. If it is, a bad SW update can pin
+# itself in the browser and there is no way to push a correction.
+/sw.js
+  Cache-Control: no-cache, no-store, must-revalidate, max-age=0
+
+# The manifest is fetched rarely and changes rarely.
+/manifest.webmanifest
+  Cache-Control: public, max-age=3600
+
+# HTML must always revalidate so content and structured data stay current.
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate

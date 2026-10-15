@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Page not found — Emoji Directory</title>
+<meta name="description" content="That page doesn't exist. Search the full Unicode 16.0 emoji directory instead.">
+<meta name="robots" content="noindex, follow">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/favicon.svg">
+<link rel="stylesheet" href="/assets/css/site.css">
+<script>(function(){try{var t=JSON.parse(localStorage.getItem('ed:theme')||'"auto"');
+var d=t==='dark'||(t==='auto'&&matchMedia('(prefers-color-scheme: dark)').matches);
+document.documentElement.dataset.theme=d?'dark':'light';}catch(e){}})();</script>
+<style>
+  .nf { max-width: 720px; margin: 0 auto; padding: 48px 0 64px; text-align: center; }
+  .nf-glyph { font-family: var(--emoji); font-size: clamp(64px, 16vw, 104px); line-height: 1;
+              display: block; margin-bottom: 8px; }
+  .nf h1 { font-size: clamp(22px, 4vw, 30px); margin: 0 0 10px; letter-spacing: -.01em; }
+  .nf p  { color: var(--text-dim); margin: 0 auto 26px; max-width: 46ch; }
+  .nf-search { display: flex; gap: 8px; max-width: 460px; margin: 0 auto 34px; }
+  .nf-search input { flex: 1; min-width: 0; padding: 12px 14px; font: inherit;
+                     border: 1px solid var(--border-strong); border-radius: var(--radius-pill);
+                     background: var(--surface); color: var(--text); }
+  .nf-search button { padding: 12px 20px; font: inherit; font-weight: 600; cursor: pointer;
+                      border: 0; border-radius: var(--radius-pill);
+                      background: var(--accent); color: var(--accent-text); }
+  .nf-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+             gap: 8px; text-align: left; margin-bottom: 30px; }
+  .nf-grid a { display: block; padding: 12px 14px; border-radius: var(--radius);
+               border: 1px solid var(--border); background: var(--surface);
+               color: var(--text); text-decoration: none; font-size: 14px; font-weight: 500; }
+  .nf-grid a:hover { background: var(--surface-hover); border-color: var(--border-strong); }
+  .nf-note { font-size: 13px; color: var(--text-faint); }
+  .nf-note a { color: var(--accent); }
+</style>
+</head>
+<body data-lang="en" data-base="/">
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="/"><span class="brand-mark" aria-hidden="true">🙂</span>
+      <span>Emoji<span style="color:var(--text-faint)">Directory</span></span></a>
+  </div>
+</header>
+
+<main class="wrap" id="main">
+  <div class="nf">
+    <span class="nf-glyph" aria-hidden="true">🧭</span>
+    <h1>That page isn’t here</h1>
+    <p>The address may be mistyped, or the emoji may have been renamed. Nothing is broken
+       on your end — try searching the full directory of 3,781 emoji instead.</p>
+
+    <form class="nf-search" role="search" action="/" method="get">
+      <label class="sr-only" for="nf-q">Search emoji</label>
+      <input id="nf-q" type="search" name="q" autocomplete="off" spellcheck="false"
+             placeholder="Try “shrug”, “flag”, “heart”…">
+      <button type="submit">Search</button>
+    </form>
+
+    <div class="nf-grid">
+      <a href="/smileys-emotion/">😀 Smileys &amp; Emotion</a>
+      <a href="/people-body/">🧑 People &amp; Body</a>
+      <a href="/animals-nature/">🐻 Animals &amp; Nature</a>
+      <a href="/food-drink/">🍔 Food &amp; Drink</a>
+      <a href="/travel-places/">✈️ Travel &amp; Places</a>
+      <a href="/activities/">⚽ Activities</a>
+      <a href="/objects/">💡 Objects</a>
+      <a href="/symbols/">❤️ Symbols</a>
+      <a href="/flags/">🏁 Flags</a>
+    </div>
+
+    <p class="nf-note">Browse by skin tone:
+      <a href="/tone/light/">🏻 light</a> ·
+      <a href="/tone/medium-light/">🏼 medium-light</a> ·
+      <a href="/tone/medium/">🏽 medium</a> ·
+      <a href="/tone/medium-dark/">🏾 medium-dark</a> ·
+      <a href="/tone/dark/">🏿 dark</a>
+    </p>
+    <p class="nf-note" style="margin-top:14px">
+      <a href="/">Full directory</a> ·
+      <a href="/faq/">FAQ</a> ·
+      <a href="/hi/">हिन्दी</a> ·
+      <a href="/es/">Español</a> ·
+      <a href="/ar/">العربية</a>
+    </p>
+  </div>
+</main>
+
+</body>
+</html>
