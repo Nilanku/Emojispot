@@ -281,6 +281,9 @@
   function syncToneToggle() {
     const btn = $('#tone-expand');
     if (!btn) return;
+    // Pointless on a tone page: every cell there is already a variant, and
+    // expanding would reset the tone to neutral and contradict the page.
+    if (PAGE.page === 'tone') { btn.hidden = true; return; }
     btn.hidden = $$('.cell[data-toned]').length === 0;
   }
 
@@ -712,6 +715,15 @@
     }
 
     state.byChar = new Map(state.data.emoji.map((e, i) => [e.c, i]));
+
+    /* On a skin-tone page the cells are rendered in that tone, so the active
+       tone must match — otherwise the glyph on screen and the glyph copied to
+       the clipboard disagree (you would see 👋🏿 and paste 👋). The page index
+       wins over the remembered preference for the length of the visit. */
+    if (typeof PAGE.tone === 'number' && PAGE.tone >= 0) {
+      state.tone = PAGE.tone;
+      store.set(LS.tone, PAGE.tone);
+    }
     // Snapshot the server-rendered grid now. Capturing it lazily inside
     // restoreServerGrid() would record whatever a search had just put there.
     const gEl = $('#grid');

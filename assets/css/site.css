@@ -605,6 +605,13 @@ img, svg { display: block; max-width: 100%; }
   gap: 4px;
 }
 
+/* The skin-tone pages group their cells by category, so #grid there contains
+   headings and nested .grid blocks rather than cells directly. Without this,
+   the outer grid lays each grouping out as if it were a single 52px cell,
+   which collapses the whole page into one narrow column. */
+#grid > .sec-head,
+#grid > .grid { grid-column: 1 / -1; }
+
 .cell {
   position: relative;
   aspect-ratio: 1;
