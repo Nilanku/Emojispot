@@ -23,10 +23,18 @@
 <meta property="og:description" content="17 emojis de Book paper prontos para copiar. Nomes, palavras-chave, tons de pele e pontos de código.">
 <meta property="og:url" content="https://emojispot.world/pt/objects/book-paper/">
 <meta property="og:locale" content="pt">
-<meta name="twitter:card" content="summary">
+<meta property="og:site_name" content="EmojiSpot">
+<meta property="og:image" content="https://emojispot.world/assets/img/og/home.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Emojis de Book paper — Objetos">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://emojispot.world/assets/img/og/home.png">
 <link rel="manifest" href="/manifest.webmanifest">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/favicon.svg">
+<link rel="preload" href="/assets/fonts/sora.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/css/site.css">
 <script>(function(){try{var t=JSON.parse(localStorage.getItem('ed:theme')||'"auto"');
 var d=t==='dark'||(t==='auto'&&matchMedia('(prefers-color-scheme: dark)').matches);
@@ -37,22 +45,16 @@ document.documentElement.dataset.theme=d?'dark':'light';}catch(e){}})();</script
 <a class="skip" href="#main">Ir para o conteúdo</a>
 <header class="site-header">
   <div class="wrap header-inner">
-    <a class="brand" href="/pt/"><span class="brand-mark" aria-hidden="true">🙂</span>
-      <span>Emoji<span style="color:var(--text-faint)">Directory</span></span></a>
-    <div class="search" role="search">
-      <span class="i-search" aria-hidden="true"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></span>
-      <label class="sr-only" for="q">Pesquisar emojis</label>
-      <input id="q" type="search" autocomplete="off" spellcheck="false"
-             placeholder="Pesquise emojis — nome, palavra-chave ou uso" aria-describedby="search-hint">
-      <span id="search-hint" class="sr-only">Pesquise emojis — nome, palavra-chave ou uso</span>
-      <button class="i-clear" id="q-clear" type="button" aria-label="Limpar"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
-    </div>
+    <a class="brand" href="/pt/">
+      <span class="brand-mark" aria-hidden="true">😀</span>
+      <span class="brand-name">Emoji<span class="brand-sub">Spot</span></span>
+    </a>
     <div class="header-actions">
-      <button class="icon-btn" id="select-toggle" type="button" aria-pressed="false"
-              title="Bandeja" aria-label="Bandeja"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13h4l1.5 2.5h5L16 13h4"/><path d="M5.5 5h13l1.5 8v6H4v-6Z"/></svg><span class="badge" id="tray-count" hidden>0</span></button>
+      <button class="nav-btn" id="select-toggle" type="button" aria-pressed="false"
+              title="Bandeja" aria-label="Bandeja"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13h4l1.5 2.5h5L16 13h4"/><path d="M5.5 5h13l1.5 8v6H4v-6Z"/></svg><span class="label">Bandeja</span><span class="badge" id="tray-count" hidden>0</span></button>
       <div class="menu">
-        <button class="icon-btn" id="theme-toggle" type="button" aria-haspopup="true"
-                title="Tema" aria-label="Tema"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5 19 19M19 5l-1.5 1.5M6.5 17.5 5 19"/></svg></button>
+        <button class="nav-btn" id="theme-toggle" type="button" aria-haspopup="true"
+                title="Tema" aria-label="Tema"><span class="ic-sun"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5 19 19M19 5l-1.5 1.5M6.5 17.5 5 19"/></svg></span><span class="ic-moon"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A8.5 8.5 0 1 1 11.2 3a6.5 6.5 0 0 0 9.8 9.8Z"/></svg></span><span class="label">Tema</span></button>
         <div class="menu-panel" role="menu">
           <div class="menu-label">Tema</div>
           <button type="button" role="menuitemradio" aria-checked="false" data-theme-opt="auto">Automático</button>
@@ -61,25 +63,35 @@ document.documentElement.dataset.theme=d?'dark':'light';}catch(e){}})();</script
         </div>
       </div>
       <div class="menu">
-        <button class="icon-btn" type="button" aria-haspopup="true" title="Idioma" aria-label="Idioma"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18 15 15 0 0 1 0-18Z"/></svg></button>
+        <button class="nav-btn" type="button" aria-haspopup="true" title="Idioma" aria-label="Idioma"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18 15 15 0 0 1 0-18Z"/></svg><span class="label">Idioma</span></button>
         <div class="menu-panel" role="menu">
           <div class="menu-label">Idioma</div>
           <button type="button" role="menuitemradio" aria-checked="false" data-lang-go="en">English</button><button type="button" role="menuitemradio" aria-checked="false" data-lang-go="hi">हिन्दी</button><button type="button" role="menuitemradio" aria-checked="false" data-lang-go="es">Español</button><button type="button" role="menuitemradio" aria-checked="false" data-lang-go="ar">العربية</button><button type="button" role="menuitemradio" aria-checked="true" data-lang-go="pt">Português</button><button type="button" role="menuitemradio" aria-checked="false" data-lang-go="fr">Français</button><button type="button" role="menuitemradio" aria-checked="false" data-lang-go="de">Deutsch</button><button type="button" role="menuitemradio" aria-checked="false" data-lang-go="id">Indonesia</button>
         </div>
       </div>
+      <button class="nav-btn" type="button" data-view="fav" aria-pressed="false"
+              title="Favoritos" aria-label="Favoritos"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="m12 3 2.9 5.9 6.5.9-4.7 4.6 1.1 6.5-5.8-3-5.8 3 1.1-6.5L2.6 9.8l6.5-.9Z"/></svg><span class="label">Favoritos</span><span id="fav-count" hidden>0</span></button>
     </div>
   </div>
 </header>
 <main id="main">
   <div class="wrap">
     <nav class="crumbs" aria-label="Breadcrumb"><a href="/pt/">Todos os emojis</a><span class="sep" aria-hidden="true">›</span><a href="/pt/objects/">Objetos</a><span class="sep" aria-hidden="true">›</span><span aria-current="page">Book paper</span></nav>
-    <section class="hero" style="padding-block:0 20px">
+    <section class="hero hero--compact">
       <h1>Book paper</h1>
       <p>17 emojis em Book paper, parte de Objetos. Toque para copiar.</p>
+      <form class="search" role="search" action="/pt/" method="get">
+        <span class="i-search" aria-hidden="true"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></span>
+        <label class="sr-only" for="q">Pesquisar emojis</label>
+        <input id="q" name="q" type="search" autocomplete="off" spellcheck="false"
+               placeholder="Pesquise emojis — nome, palavra-chave ou uso" aria-describedby="search-hint">
+        <span id="search-hint" class="sr-only">Pesquise emojis — nome, palavra-chave ou uso</span>
+        <button class="i-clear" id="q-clear" type="button" aria-label="Limpar"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+      </form>
+      <div class="tones" id="tones"></div>
     </section>
-    <div class="tones" id="tones"></div>
     <div class="toolbar">
-      <button class="chip is-active" type="button" data-view="all" aria-pressed="true">Book paper</button>
+      <button class="chip" type="button" data-view="all" aria-pressed="true">Todos os emojis <span class="n">17</span></button>
       <button class="chip" type="button" data-view="fav" aria-pressed="false">Favoritos <span class="n" id="fav-n">0</span></button>
       <button class="chip" type="button" data-view="recent" aria-pressed="false">Recentes</button>
     </div>

@@ -1,92 +1,141 @@
-<!DOCTYPE html>
-<html lang="en" data-theme="light">
+<!doctype html>
+<html lang="en" dir="ltr" data-theme="light">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Page not found — Emoji Directory</title>
-<meta name="description" content="That page doesn't exist. Search the full Unicode 16.0 emoji directory instead.">
-<meta name="robots" content="noindex, follow">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Page not found — EmojiSpot</title>
+<meta name="description" content="That page doesn’t exist. Search EmojiSpot instead — the full Unicode 16.0 emoji set, free to copy.">
+<link rel="canonical" href="https://emojispot.world/">
+<link rel="alternate" hreflang="en" href="https://emojispot.world/">
+<link rel="alternate" hreflang="hi" href="https://emojispot.world/hi/">
+<link rel="alternate" hreflang="es" href="https://emojispot.world/es/">
+<link rel="alternate" hreflang="ar" href="https://emojispot.world/ar/">
+<link rel="alternate" hreflang="pt" href="https://emojispot.world/pt/">
+<link rel="alternate" hreflang="fr" href="https://emojispot.world/fr/">
+<link rel="alternate" hreflang="de" href="https://emojispot.world/de/">
+<link rel="alternate" hreflang="id" href="https://emojispot.world/id/">
+<link rel="alternate" hreflang="x-default" href="https://emojispot.world/">
+<meta name="robots" content="noindex,follow">
+<meta name="theme-color" content="#ffffff">
+<meta name="color-scheme" content="light dark">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Page not found — EmojiSpot">
+<meta property="og:description" content="That page doesn’t exist. Search EmojiSpot instead — the full Unicode 16.0 emoji set, free to copy.">
+<meta property="og:url" content="https://emojispot.world/">
+<meta property="og:locale" content="en">
+<meta property="og:site_name" content="EmojiSpot">
+<meta property="og:image" content="https://emojispot.world/assets/img/og/home.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Page not found — EmojiSpot">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://emojispot.world/assets/img/og/home.png">
 <link rel="manifest" href="/manifest.webmanifest">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/favicon.svg">
+<link rel="preload" href="/assets/fonts/sora.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/css/site.css">
 <script>(function(){try{var t=JSON.parse(localStorage.getItem('ed:theme')||'"auto"');
 var d=t==='dark'||(t==='auto'&&matchMedia('(prefers-color-scheme: dark)').matches);
 document.documentElement.dataset.theme=d?'dark':'light';}catch(e){}})();</script>
-<style>
-  .nf { max-width: 720px; margin: 0 auto; padding: 48px 0 64px; text-align: center; }
-  .nf-glyph { font-family: var(--emoji); font-size: clamp(64px, 16vw, 104px); line-height: 1;
-              display: block; margin-bottom: 8px; }
-  .nf h1 { font-size: clamp(22px, 4vw, 30px); margin: 0 0 10px; letter-spacing: -.01em; }
-  .nf p  { color: var(--text-dim); margin: 0 auto 26px; max-width: 46ch; }
-  .nf-search { display: flex; gap: 8px; max-width: 460px; margin: 0 auto 34px; }
-  .nf-search input { flex: 1; min-width: 0; padding: 12px 14px; font: inherit;
-                     border: 1px solid var(--border-strong); border-radius: var(--radius-pill);
-                     background: var(--surface); color: var(--text); }
-  .nf-search button { padding: 12px 20px; font: inherit; font-weight: 600; cursor: pointer;
-                      border: 0; border-radius: var(--radius-pill);
-                      background: var(--accent); color: var(--accent-text); }
-  .nf-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-             gap: 8px; text-align: left; margin-bottom: 30px; }
-  .nf-grid a { display: block; padding: 12px 14px; border-radius: var(--radius);
-               border: 1px solid var(--border); background: var(--surface);
-               color: var(--text); text-decoration: none; font-size: 14px; font-weight: 500; }
-  .nf-grid a:hover { background: var(--surface-hover); border-color: var(--border-strong); }
-  .nf-note { font-size: 13px; color: var(--text-faint); }
-  .nf-note a { color: var(--accent); }
-</style>
+
 </head>
 <body data-lang="en" data-base="/">
-
+<a class="skip" href="#main">Skip to content</a>
 <header class="site-header">
   <div class="wrap header-inner">
-    <a class="brand" href="/"><span class="brand-mark" aria-hidden="true">🙂</span>
-      <span>Emoji<span style="color:var(--text-faint)">Directory</span></span></a>
+    <a class="brand" href="/">
+      <span class="brand-mark" aria-hidden="true">😀</span>
+      <span class="brand-name">Emoji<span class="brand-sub">Spot</span></span>
+    </a>
+    <div class="header-actions">
+      <button class="nav-btn" id="select-toggle" type="button" aria-pressed="false"
+              title="Tray" aria-label="Tray"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13h4l1.5 2.5h5L16 13h4"/><path d="M5.5 5h13l1.5 8v6H4v-6Z"/></svg><span class="label">Tray</span><span class="badge" id="tray-count" hidden>0</span></button>
+      <div class="menu">
+        <button class="nav-btn" id="theme-toggle" type="button" aria-haspopup="true"
+                title="Theme" aria-label="Theme"><span class="ic-sun"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5 19 19M19 5l-1.5 1.5M6.5 17.5 5 19"/></svg></span><span class="ic-moon"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A8.5 8.5 0 1 1 11.2 3a6.5 6.5 0 0 0 9.8 9.8Z"/></svg></span><span class="label">Theme</span></button>
+        <div class="menu-panel" role="menu">
+          <div class="menu-label">Theme</div>
+          <button type="button" role="menuitemradio" aria-checked="false" data-theme-opt="auto">Auto</button>
+          <button type="button" role="menuitemradio" aria-checked="false" data-theme-opt="light">Light</button>
+          <button type="button" role="menuitemradio" aria-checked="false" data-theme-opt="dark">Dark</button>
+        </div>
+      </div>
+      <div class="menu">
+        <button class="nav-btn" type="button" aria-haspopup="true" title="Language" aria-label="Language"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18 15 15 0 0 1 0-18Z"/></svg><span class="label">Language</span></button>
+        <div class="menu-panel" role="menu">
+          <div class="menu-label">Language</div>
+          <button type="button" role="menuitemradio" aria-checked="true" data-lang-go="en">English</button><button type="button" role="menuitemradio" aria-checked="false" data-lang-go="hi">हिन्दी</button><button type="button" role="menuitemradio" aria-checked="false" data-lang-go="es">Español</button><button type="button" role="menuitemradio" aria-checked="false" data-lang-go="ar">العربية</button><button type="button" role="menuitemradio" aria-checked="false" data-lang-go="pt">Português</button><button type="button" role="menuitemradio" aria-checked="false" data-lang-go="fr">Français</button><button type="button" role="menuitemradio" aria-checked="false" data-lang-go="de">Deutsch</button><button type="button" role="menuitemradio" aria-checked="false" data-lang-go="id">Indonesia</button>
+        </div>
+      </div>
+    </div>
   </div>
 </header>
-
-<main class="wrap" id="main">
-  <div class="nf">
-    <span class="nf-glyph" aria-hidden="true">🧭</span>
-    <h1>That page isn’t here</h1>
-    <p>The address may be mistyped, or the emoji may have been renamed. Nothing is broken
-       on your end — try searching the full directory of 3,781 emoji instead.</p>
-
-    <form class="nf-search" role="search" action="/" method="get">
-      <label class="sr-only" for="nf-q">Search emoji</label>
-      <input id="nf-q" type="search" name="q" autocomplete="off" spellcheck="false"
-             placeholder="Try “shrug”, “flag”, “heart”…">
-      <button type="submit">Search</button>
-    </form>
-
-    <div class="nf-grid">
-      <a href="/smileys-emotion/">😀 Smileys &amp; Emotion</a>
-      <a href="/people-body/">🧑 People &amp; Body</a>
-      <a href="/animals-nature/">🐻 Animals &amp; Nature</a>
-      <a href="/food-drink/">🍔 Food &amp; Drink</a>
-      <a href="/travel-places/">✈️ Travel &amp; Places</a>
-      <a href="/activities/">⚽ Activities</a>
-      <a href="/objects/">💡 Objects</a>
-      <a href="/symbols/">❤️ Symbols</a>
-      <a href="/flags/">🏁 Flags</a>
-    </div>
-
-    <p class="nf-note">Browse by skin tone:
-      <a href="/tone/light/">🏻 light</a> ·
-      <a href="/tone/medium-light/">🏼 medium-light</a> ·
-      <a href="/tone/medium/">🏽 medium</a> ·
-      <a href="/tone/medium-dark/">🏾 medium-dark</a> ·
-      <a href="/tone/dark/">🏿 dark</a>
-    </p>
-    <p class="nf-note" style="margin-top:14px">
-      <a href="/">Full directory</a> ·
-      <a href="/faq/">FAQ</a> ·
-      <a href="/hi/">हिन्दी</a> ·
-      <a href="/es/">Español</a> ·
-      <a href="/ar/">العربية</a>
-    </p>
+<main id="main">
+  <div class="wrap">
+    <section class="hero hero--compact">
+      <h1>That page isn’t here</h1>
+      <p>The address may be mistyped, or the emoji may have been renamed.
+         Nothing is broken on your end — search the full directory instead.</p>
+      <form class="search" role="search" action="/" method="get">
+        <span class="i-search" aria-hidden="true"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></span>
+        <label class="sr-only" for="q">Search emoji</label>
+        <input id="q" name="q" type="search" autocomplete="off" spellcheck="false"
+               placeholder="Search emoji — name, keyword or use case" aria-describedby="search-hint">
+        <span id="search-hint" class="sr-only">Search emoji — name, keyword or use case</span>
+        <button class="i-clear" id="q-clear" type="button" aria-label="Clear"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+      </form>
+    </section>
+    <div class="sec-head"><h2>Categories</h2></div>
+    <div class="groups" style="margin-block-end:24px"><a class="group-card" href="/smileys-emotion/"><span class="face-row" aria-hidden="true">😀😃😄😁</span><span class="meta"><span class="name">Smileys &amp; Emotion</span></span></a><a class="group-card" href="/people-body/"><span class="face-row" aria-hidden="true">👋🤚🖐️✋</span><span class="meta"><span class="name">People &amp; Body</span></span></a><a class="group-card" href="/animals-nature/"><span class="face-row" aria-hidden="true">🐵🐒🦍🦧</span><span class="meta"><span class="name">Animals &amp; Nature</span></span></a><a class="group-card" href="/food-drink/"><span class="face-row" aria-hidden="true">🍇🍈🍉🍊</span><span class="meta"><span class="name">Food &amp; Drink</span></span></a><a class="group-card" href="/travel-places/"><span class="face-row" aria-hidden="true">🌍🌎🌏🌐</span><span class="meta"><span class="name">Travel &amp; Places</span></span></a><a class="group-card" href="/activities/"><span class="face-row" aria-hidden="true">🎃🎄🎆🎇</span><span class="meta"><span class="name">Activities</span></span></a><a class="group-card" href="/objects/"><span class="face-row" aria-hidden="true">👓🕶️🥽🥼</span><span class="meta"><span class="name">Objects</span></span></a><a class="group-card" href="/symbols/"><span class="face-row" aria-hidden="true">🏧🚮🚰♿</span><span class="meta"><span class="name">Symbols</span></span></a><a class="group-card" href="/flags/"><span class="face-row" aria-hidden="true">🏁🚩🎌🏴</span><span class="meta"><span class="name">Flags</span></span></a></div>
+    <div class="sec-head"><h2>Browse by skin tone</h2></div>
+    <nav class="subnav tone-nav" aria-label="Browse by skin tone"><a href="/tone/light/">👍🏻 Light <span class="n">323</span></a><a href="/tone/medium-light/">👍🏼 Medium-light <span class="n">323</span></a><a href="/tone/medium/">👍🏽 Medium <span class="n">323</span></a><a href="/tone/medium-dark/">👍🏾 Medium-dark <span class="n">323</span></a><a href="/tone/dark/">👍🏿 Dark <span class="n">323</span></a></nav>
+    <div class="sec-head" style="margin-top:12px"><h2>Language</h2></div>
+    <nav class="subnav" aria-label="Language"><a href="/">English</a><a href="/hi/">Hindi</a><a href="/es/">Spanish</a><a href="/ar/">Arabic</a><a href="/pt/">Portuguese</a><a href="/fr/">French</a><a href="/de/">German</a><a href="/id/">Indonesian</a></nav>
   </div>
 </main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div><h3>Categories</h3><div class="footer-links"><a href="/smileys-emotion/">Smileys &amp; Emotion</a><a href="/people-body/">People &amp; Body</a><a href="/animals-nature/">Animals &amp; Nature</a><a href="/food-drink/">Food &amp; Drink</a><a href="/travel-places/">Travel &amp; Places</a><a href="/activities/">Activities</a><a href="/objects/">Objects</a><a href="/symbols/">Symbols</a><a href="/flags/">Flags</a></div></div>
+      <div><h3>Language</h3><div class="footer-links"><a href="/">English</a><a href="/hi/">Hindi</a><a href="/es/">Spanish</a><a href="/ar/">Arabic</a><a href="/pt/">Portuguese</a><a href="/fr/">French</a><a href="/de/">German</a><a href="/id/">Indonesian</a></div></div>
+      <div><h3>About</h3><p>No tracking, no accounts, no ads. Favourites and history stay on your device.</p>
+        <div class="footer-links" style="margin-top:10px">
+          <a href="/faq/">FAQ</a>
+        </div></div>
+    </div>
+    <div class="footer-bottom">
+      <p>Emoji data: Unicode Emoji 16.0 · Names & keywords: Unicode CLDR</p>
+      <p style="margin-top:6px">Unicode data is used under the Unicode License v3. Free for anyone to use.</p>
+    </div>
+  </div>
+</footer>
+<div class="toast-layer" id="toasts" aria-live="polite" aria-atomic="false"></div>
 
+<div class="tray" id="tray" data-open="false" role="region" aria-label="Tray">
+  <div class="wrap tray-inner">
+    <div class="tray-head">
+      <h2>Tray</h2>
+      <span class="spacer" style="flex:1"></span>
+      <button class="btn btn-sm btn-primary" id="tray-copy" type="button">Copy all</button>
+      <button class="btn btn-sm" id="tray-clear" type="button">Clear</button>
+    </div>
+    <div class="tray-body" id="tray-body"></div>
+  </div>
+</div>
+
+<dialog id="detail" aria-labelledby="detail-title">
+  <div class="sheet">
+    <div class="sheet-head">
+      <h2 id="detail-title">—</h2>
+      <button class="icon-btn" id="detail-close" type="button" aria-label="Close"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    </div>
+    <div class="sheet-body" id="detail-body"></div>
+  </div>
+</dialog>
+
+<script>window.__EMOJI__ = {lang:"en", page:"home"};</script>
+<script src="/assets/js/site.js" defer></script>
 </body>
 </html>

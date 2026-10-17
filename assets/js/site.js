@@ -177,7 +177,7 @@
     const resolved = state.theme === 'auto' ? (sysDark ? 'dark' : 'light') : state.theme;
     root.dataset.theme = resolved;
     const meta = $('meta[name="theme-color"]');
-    if (meta) meta.setAttribute('content', resolved === 'dark' ? '#0d0e11' : '#ffffff');
+    if (meta) meta.setAttribute('content', resolved === 'dark' ? '#0e0e10' : '#ffffff');
     $$('[data-theme-opt]').forEach(b => b.setAttribute('aria-checked', String(b.dataset.themeOpt === state.theme)));
   }
   matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
@@ -268,6 +268,16 @@
   }
 
   /* Only offer the toggle when the page actually has tone-capable emoji. */
+  /* The homepage shows two grids: the curated "Popular emoji" strip and #grid,
+     which fills with search results or the full 1,906 set on demand. Showing
+     both at once reads as a duplicated page, so one is always hidden. */
+  function syncPopular() {
+    const sec = document.getElementById('popular-sec');
+    const grid = $('#grid');
+    if (!sec || !grid) return;
+    sec.hidden = !grid.hidden && grid.children.length > 0;
+  }
+
   function syncToneToggle() {
     const btn = $('#tone-expand');
     if (!btn) return;
@@ -412,9 +422,9 @@
     if (view === 'all') {
       if (empty) empty.hidden = true;
       note && (note.hidden = true);
-      grid.hidden = false;
-      restoreServerGrid();
+      restoreServerGrid(!!opts.buildAll);
       syncToneToggle();
+      syncPopular();
       return;
     }
 
@@ -434,9 +444,11 @@
         empty.hidden = false;
         empty.innerHTML = `<div class="e-glyph">${view === 'fav' ? '🤍' : '🕘'}</div><p>${esc(t(view + '_empty'))}</p>`;
       }
+      syncPopular();
     } else {
       if (empty) empty.hidden = true;
       renderGrid(grid, indices);
+      syncPopular();
     }
   }
 
@@ -445,20 +457,27 @@
   function allIndices() { return state.allIndices || (state.allIndices = state.data.emoji.map((_, i) => i)); }
 
   let serverGridHTML = null;
-  function restoreServerGrid() {
+  function restoreServerGrid(buildAll) {
     const grid = $('#grid');
     if (!grid) return;
-    if (serverGridHTML === null) serverGridHTML = grid.innerHTML;
-    if (serverGridHTML.trim() === '') {
-      // this page ships no server-rendered grid (the homepage) — build it now,
-      // in chunks, only because the reader asked for it
-      if (grid.dataset.rendered !== '1') {
-        grid.dataset.rendered = '1';
-        renderGrid(grid, allIndices());
-      }
+
+    if (serverGridHTML && serverGridHTML.trim() !== '') {
+      if (grid.innerHTML !== serverGridHTML) grid.innerHTML = serverGridHTML;
+      grid.hidden = false;
       return;
     }
-    grid.innerHTML = serverGridHTML;
+
+    // This page ships no server-rendered grid (the homepage). Building all
+    // 1,906 cells is only worth doing when the reader asked for it by name —
+    // clearing a search should return them to the curated view, not dump the
+    // entire set on screen.
+    if (buildAll) {
+      renderGrid(grid, allIndices());
+      grid.hidden = false;
+    } else {
+      grid.innerHTML = '';
+      grid.hidden = true;
+    }
   }
 
   function runSearch(q) {
@@ -469,7 +488,7 @@
     const searchBox = $('.search');
     searchBox && searchBox.classList.toggle('has-value', !!q);
 
-    if (!q.trim()) { setView('all'); return; }
+    if (!q.trim()) { setView('all'); syncPopular(); return; }
 
     const res = searchEmoji(q);
     const list = res ? res.list : [];
@@ -483,6 +502,7 @@
         empty.innerHTML = `<div class="e-glyph">🔍</div><p><b>${esc(t('no_results'))}</b></p><p>${esc(t('no_results_hint'))}</p>`;
       }
       note && (note.hidden = true);
+      syncPopular();
       return;
     }
     if (note) {
@@ -491,6 +511,7 @@
         (list.length === 1 ? esc(t('results_one')) : esc(t('results_many', { n: list.length })));
     }
     renderGrid(grid, list);
+    syncPopular();
   }
 
   /* -------------------------------------------------------- detail sheet */
@@ -691,6 +712,10 @@
     }
 
     state.byChar = new Map(state.data.emoji.map((e, i) => [e.c, i]));
+    // Snapshot the server-rendered grid now. Capturing it lazily inside
+    // restoreServerGrid() would record whatever a search had just put there.
+    const gEl = $('#grid');
+    if (gEl) serverGridHTML = gEl.innerHTML;
 
     applyTheme();
     buildTones();
@@ -798,7 +823,8 @@
     }
 
     /* --- view chips, toolbars, menus --- */
-    $$('[data-view]').forEach(b => b.addEventListener('click', () => setView(b.dataset.view)));
+    $$('[data-view]').forEach(b => b.addEventListener('click',
+      () => setView(b.dataset.view, { buildAll: b.dataset.view === 'all' })));
 
     $('#select-toggle')?.addEventListener('click', (ev) => {
       state.selectMode = !state.selectMode;

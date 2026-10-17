@@ -23,10 +23,18 @@
 <meta property="og:description" content="Como copiar emojis, por que eles parecem diferentes em cada aparelho, como funcionam os tons de pele e de onde vêm os dados deste site.">
 <meta property="og:url" content="https://emojispot.world/pt/faq/">
 <meta property="og:locale" content="pt">
-<meta name="twitter:card" content="summary">
+<meta property="og:site_name" content="EmojiSpot">
+<meta property="og:image" content="https://emojispot.world/assets/img/og/home.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Perguntas frequentes">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://emojispot.world/assets/img/og/home.png">
 <link rel="manifest" href="/manifest.webmanifest">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/favicon.svg">
+<link rel="preload" href="/assets/fonts/sora.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/css/site.css">
 <script>(function(){try{var t=JSON.parse(localStorage.getItem('ed:theme')||'"auto"');
 var d=t==='dark'||(t==='auto'&&matchMedia('(prefers-color-scheme: dark)').matches);
@@ -37,22 +45,16 @@ document.documentElement.dataset.theme=d?'dark':'light';}catch(e){}})();</script
 <a class="skip" href="#main">Ir para o conteúdo</a>
 <header class="site-header">
   <div class="wrap header-inner">
-    <a class="brand" href="/pt/"><span class="brand-mark" aria-hidden="true">🙂</span>
-      <span>Emoji<span style="color:var(--text-faint)">Directory</span></span></a>
-    <div class="search" role="search">
-      <span class="i-search" aria-hidden="true"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></span>
-      <label class="sr-only" for="q">Pesquisar emojis</label>
-      <input id="q" type="search" autocomplete="off" spellcheck="false"
-             placeholder="Pesquise emojis — nome, palavra-chave ou uso" aria-describedby="search-hint">
-      <span id="search-hint" class="sr-only">Pesquise emojis — nome, palavra-chave ou uso</span>
-      <button class="i-clear" id="q-clear" type="button" aria-label="Limpar"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
-    </div>
+    <a class="brand" href="/pt/">
+      <span class="brand-mark" aria-hidden="true">😀</span>
+      <span class="brand-name">Emoji<span class="brand-sub">Spot</span></span>
+    </a>
     <div class="header-actions">
-      <button class="icon-btn" id="select-toggle" type="button" aria-pressed="false"
-              title="Bandeja" aria-label="Bandeja"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13h4l1.5 2.5h5L16 13h4"/><path d="M5.5 5h13l1.5 8v6H4v-6Z"/></svg><span class="badge" id="tray-count" hidden>0</span></button>
+      <button class="nav-btn" id="select-toggle" type="button" aria-pressed="false"
+              title="Bandeja" aria-label="Bandeja"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13h4l1.5 2.5h5L16 13h4"/><path d="M5.5 5h13l1.5 8v6H4v-6Z"/></svg><span class="label">Bandeja</span><span class="badge" id="tray-count" hidden>0</span></button>
       <div class="menu">
-        <button class="icon-btn" id="theme-toggle" type="button" aria-haspopup="true"
-                title="Tema" aria-label="Tema"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5 19 19M19 5l-1.5 1.5M6.5 17.5 5 19"/></svg></button>
+        <button class="nav-btn" id="theme-toggle" type="button" aria-haspopup="true"
+                title="Tema" aria-label="Tema"><span class="ic-sun"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5 19 19M19 5l-1.5 1.5M6.5 17.5 5 19"/></svg></span><span class="ic-moon"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A8.5 8.5 0 1 1 11.2 3a6.5 6.5 0 0 0 9.8 9.8Z"/></svg></span><span class="label">Tema</span></button>
         <div class="menu-panel" role="menu">
           <div class="menu-label">Tema</div>
           <button type="button" role="menuitemradio" aria-checked="false" data-theme-opt="auto">Automático</button>
@@ -61,21 +63,31 @@ document.documentElement.dataset.theme=d?'dark':'light';}catch(e){}})();</script
         </div>
       </div>
       <div class="menu">
-        <button class="icon-btn" type="button" aria-haspopup="true" title="Idioma" aria-label="Idioma"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18 15 15 0 0 1 0-18Z"/></svg></button>
+        <button class="nav-btn" type="button" aria-haspopup="true" title="Idioma" aria-label="Idioma"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18 15 15 0 0 1 0-18Z"/></svg><span class="label">Idioma</span></button>
         <div class="menu-panel" role="menu">
           <div class="menu-label">Idioma</div>
           <button type="button" role="menuitemradio" aria-checked="false" data-lang-go="en">English</button><button type="button" role="menuitemradio" aria-checked="false" data-lang-go="hi">हिन्दी</button><button type="button" role="menuitemradio" aria-checked="false" data-lang-go="es">Español</button><button type="button" role="menuitemradio" aria-checked="false" data-lang-go="ar">العربية</button><button type="button" role="menuitemradio" aria-checked="true" data-lang-go="pt">Português</button><button type="button" role="menuitemradio" aria-checked="false" data-lang-go="fr">Français</button><button type="button" role="menuitemradio" aria-checked="false" data-lang-go="de">Deutsch</button><button type="button" role="menuitemradio" aria-checked="false" data-lang-go="id">Indonesia</button>
         </div>
       </div>
+      <button class="nav-btn" type="button" data-view="fav" aria-pressed="false"
+              title="Favoritos" aria-label="Favoritos"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="m12 3 2.9 5.9 6.5.9-4.7 4.6 1.1 6.5-5.8-3-5.8 3 1.1-6.5L2.6 9.8l6.5-.9Z"/></svg><span class="label">Favoritos</span><span id="fav-count" hidden>0</span></button>
     </div>
   </div>
 </header>
 <main id="main">
   <div class="wrap">
     <nav class="crumbs" aria-label="Breadcrumb"><a href="/pt/">Todos os emojis</a><span class="sep" aria-hidden="true">›</span><span aria-current="page">Perguntas frequentes</span></nav>
-    <section class="hero" style="padding-block:0 24px">
+    <section class="hero hero--compact">
       <h1>Perguntas frequentes</h1>
       <p>Respostas diretas ao que as pessoas realmente perguntam sobre emojis e sobre este site.</p>
+      <form class="search" role="search" action="/pt/" method="get">
+        <span class="i-search" aria-hidden="true"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></span>
+        <label class="sr-only" for="q">Pesquisar emojis</label>
+        <input id="q" name="q" type="search" autocomplete="off" spellcheck="false"
+               placeholder="Pesquise emojis — nome, palavra-chave ou uso" aria-describedby="search-hint">
+        <span id="search-hint" class="sr-only">Pesquise emojis — nome, palavra-chave ou uso</span>
+        <button class="i-clear" id="q-clear" type="button" aria-label="Limpar"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+      </form>
     </section>
     <div class="faq">
 <div class="faq-item"><h2>Como copio um emoji?</h2><p>Toque ou clique no emoji e ele vai direto para a área de transferência. Emojis com um ponto no canto têm variações de tom de pele — escolha seu tom no seletor no topo da página e a cópia vai usá-lo. No celular, mantenha pressionado para abrir a ficha em vez de copiar.</p></div><div class="faq-item"><h2>Por que um emoji aparece diferente no meu celular?</h2><p>Emojis são caracteres, não imagens. É a fonte do seu aparelho que os desenha, por isso 😀 aparece um pouco diferente em Apple, Google, Samsung e Windows. O site mostra de propósito o caractere que seu aparelho desenharia em vez de uma imagem, então o que você vê é o que vai colar. A ficha mostra os três desenhos lado a lado.</p></div><div class="faq-item"><h2>O que são modificadores de tom de pele?</h2><p>Cinco caracteres modificadores — claro, claro médio, médio, escuro médio e escuro — que podem ser anexados a cerca de 323 emojis humanos para mudar o tom de pele. Existem para que as pessoas possam se representar. Emojis sem modificador não são «brancos»; apenas usam o desenho padrão de cada plataforma.</p></div><div class="faq-item"><h2>O que é um emoji de tons mistos?</h2><p>Alguns emojis têm duas pessoas, como um aperto de mãos ou um casal. Eles aceitam um tom diferente para cada pessoa, o que dá 25 combinações. São 260 no total. Abra um — um aperto de mãos, por exemplo — e verá todas as combinações na ficha.</p></div><div class="faq-item"><h2>O site é grátis? Preciso de conta?</h2><p>É grátis: sem cadastro, sem conta e sem anúncios. Favoritos e histórico de cópias ficam no seu próprio navegador e não são enviados a lugar nenhum. Nada do seu uso é rastreado.</p></div><div class="faq-item"><h2>Posso usar estes emojis no meu trabalho?</h2><p>Sim. Emojis são caracteres Unicode padrão — ninguém os possui e não é preciso permissão nem atribuição para digitá-los. Os desenhos mudam conforme a plataforma, então se precisar de um visual específico num arquivo de design, use a arte daquela plataforma sob a licença dela.</p></div><div class="faq-item"><h2>Funciona offline?</h2><p>Sim. Depois da primeira visita o site fica guardado no seu aparelho e abre sem conexão. Você também pode instalá-lo na tela inicial pelo menu do navegador, onde funciona como um app comum.</p></div><div class="faq-item"><h2>Os dados estão atualizados?</h2><p>O site usa Unicode Emoji 16.0, o padrão publicado atual, junto com Unicode CLDR para nomes e palavras-chave de busca em oito idiomas. Quando Emoji 17.0 for finalizado, o site será reconstruído a partir dos arquivos oficiais.</p></div>

@@ -1,10 +1,11 @@
 {
-  "name": "Emoji Directory",
-  "short_name": "Emoji",
+  "name": "EmojiSpot \u2014 Every emoji, one tap away",
+  "short_name": "EmojiSpot",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#4f46e5",
+  "theme_color": "#f5c518",
+  "description": "Copy and paste every emoji \u2014 1,906 with names, keywords, skin tones and 8 languages. No signup.",
   "icons": [
     {
       "src": "/favicon.svg",

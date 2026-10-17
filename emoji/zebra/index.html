@@ -23,36 +23,38 @@
 <meta property="og:description" content="🦓 zebra — copy the emoji, see its Unicode codepoints, keywords and skin-tone variants.">
 <meta property="og:url" content="https://emojispot.world/emoji/zebra/">
 <meta property="og:locale" content="en">
-<meta name="twitter:card" content="summary">
+<meta property="og:site_name" content="EmojiSpot">
+<meta property="og:image" content="https://emojispot.world/assets/img/og/home.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="zebra emoji 🦓 — meaning, copy & paste">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://emojispot.world/assets/img/og/home.png">
 <link rel="manifest" href="/manifest.webmanifest">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/favicon.svg">
+<link rel="preload" href="/assets/fonts/sora.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/css/site.css">
 <script>(function(){try{var t=JSON.parse(localStorage.getItem('ed:theme')||'"auto"');
 var d=t==='dark'||(t==='auto'&&matchMedia('(prefers-color-scheme: dark)').matches);
 document.documentElement.dataset.theme=d?'dark':'light';}catch(e){}})();</script>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebPage", "name": "zebra emoji 🦓 — meaning, copy & paste", "description": "🦓 zebra — copy the emoji, see its Unicode codepoints, keywords and skin-tone variants.", "inLanguage": "en", "url": "https://emojispot.world/emoji/zebra/", "isPartOf": {"@type": "WebSite", "name": "Emoji Directory", "url": "https://emojispot.world"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebPage", "name": "zebra emoji 🦓 — meaning, copy & paste", "description": "🦓 zebra — copy the emoji, see its Unicode codepoints, keywords and skin-tone variants.", "inLanguage": "en", "url": "https://emojispot.world/emoji/zebra/", "isPartOf": {"@type": "WebSite", "name": "EmojiSpot", "url": "https://emojispot.world"}}</script>
 </head>
 <body data-lang="en" data-base="/">
 <a class="skip" href="#main">Skip to content</a>
 <header class="site-header">
   <div class="wrap header-inner">
-    <a class="brand" href="/"><span class="brand-mark" aria-hidden="true">🙂</span>
-      <span>Emoji<span style="color:var(--text-faint)">Directory</span></span></a>
-    <div class="search" role="search">
-      <span class="i-search" aria-hidden="true"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></span>
-      <label class="sr-only" for="q">Search emoji</label>
-      <input id="q" type="search" autocomplete="off" spellcheck="false"
-             placeholder="Search emoji — name, keyword or use case" aria-describedby="search-hint">
-      <span id="search-hint" class="sr-only">Search emoji — name, keyword or use case</span>
-      <button class="i-clear" id="q-clear" type="button" aria-label="Clear"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
-    </div>
+    <a class="brand" href="/">
+      <span class="brand-mark" aria-hidden="true">😀</span>
+      <span class="brand-name">Emoji<span class="brand-sub">Spot</span></span>
+    </a>
     <div class="header-actions">
-      <button class="icon-btn" id="select-toggle" type="button" aria-pressed="false"
-              title="Tray" aria-label="Tray"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13h4l1.5 2.5h5L16 13h4"/><path d="M5.5 5h13l1.5 8v6H4v-6Z"/></svg><span class="badge" id="tray-count" hidden>0</span></button>
+      <button class="nav-btn" id="select-toggle" type="button" aria-pressed="false"
+              title="Tray" aria-label="Tray"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13h4l1.5 2.5h5L16 13h4"/><path d="M5.5 5h13l1.5 8v6H4v-6Z"/></svg><span class="label">Tray</span><span class="badge" id="tray-count" hidden>0</span></button>
       <div class="menu">
-        <button class="icon-btn" id="theme-toggle" type="button" aria-haspopup="true"
-                title="Theme" aria-label="Theme"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5 19 19M19 5l-1.5 1.5M6.5 17.5 5 19"/></svg></button>
+        <button class="nav-btn" id="theme-toggle" type="button" aria-haspopup="true"
+                title="Theme" aria-label="Theme"><span class="ic-sun"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5 19 19M19 5l-1.5 1.5M6.5 17.5 5 19"/></svg></span><span class="ic-moon"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A8.5 8.5 0 1 1 11.2 3a6.5 6.5 0 0 0 9.8 9.8Z"/></svg></span><span class="label">Theme</span></button>
         <div class="menu-panel" role="menu">
           <div class="menu-label">Theme</div>
           <button type="button" role="menuitemradio" aria-checked="false" data-theme-opt="auto">Auto</button>
@@ -61,7 +63,7 @@ document.documentElement.dataset.theme=d?'dark':'light';}catch(e){}})();</script
         </div>
       </div>
       <div class="menu">
-        <button class="icon-btn" type="button" aria-haspopup="true" title="Language" aria-label="Language"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18 15 15 0 0 1 0-18Z"/></svg></button>
+        <button class="nav-btn" type="button" aria-haspopup="true" title="Language" aria-label="Language"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18 15 15 0 0 1 0-18Z"/></svg><span class="label">Language</span></button>
         <div class="menu-panel" role="menu">
           <div class="menu-label">Language</div>
           <button type="button" role="menuitemradio" aria-checked="true" data-lang-go="en">English</button><button type="button" role="menuitemradio" aria-checked="false" data-lang-go="hi">हिन्दी</button><button type="button" role="menuitemradio" aria-checked="false" data-lang-go="es">Español</button><button type="button" role="menuitemradio" aria-checked="false" data-lang-go="ar">العربية</button><button type="button" role="menuitemradio" aria-checked="false" data-lang-go="pt">Português</button><button type="button" role="menuitemradio" aria-checked="false" data-lang-go="fr">Français</button><button type="button" role="menuitemradio" aria-checked="false" data-lang-go="de">Deutsch</button><button type="button" role="menuitemradio" aria-checked="false" data-lang-go="id">Indonesia</button>
@@ -73,8 +75,8 @@ document.documentElement.dataset.theme=d?'dark':'light';}catch(e){}})();</script
 <main id="main">
   <div class="wrap">
     <nav class="crumbs" aria-label="Breadcrumb"><a href="/">All emoji</a><span class="sep" aria-hidden="true">›</span><a href="/animals-nature/">Animals &amp; Nature</a><span class="sep" aria-hidden="true">›</span><a href="/animals-nature/animal-mammal/">Animal mammal</a><span class="sep" aria-hidden="true">›</span><span aria-current="page">zebra</span></nav>
-    <section class="hero" style="padding-block:0 24px">
-      <h1 style="font-size:clamp(26px,4.6vw,36px)">zebra</h1>
+    <section class="hero hero--compact">
+      <h1>zebra</h1>
       <p>Copy 🦓, or read its Unicode codepoints, keywords and skin-tone variants below.</p>
     </section>
     <div class="detail-top" style="align-items:flex-start;gap:24px">

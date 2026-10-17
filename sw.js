@@ -1,4 +1,4 @@
-/* Emoji Directory — offline support
+/* EmojiSpot — offline support
  *
  * Strategy: NETWORK-FIRST with cache fallback.
  * Cache-first would be marginally faster, but it means a reader who visited once
@@ -6,7 +6,7 @@
  * rebuilt. Network-first guarantees fresh content when online, and the cache
  * still takes over the moment the network is unavailable.
  */
-const CACHE = 'emoji-v2';
+const CACHE = 'emoji-v3';
 const CORE = ['/', '/data/emoji.json', '/data/i18n.json',
               '/assets/css/site.css', '/assets/js/site.js'];
 
