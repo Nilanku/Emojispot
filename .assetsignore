@@ -1,0 +1,4 @@
+# Never upload these as public assets.
+# wrangler.jsonc is deployment configuration, not a page.
+wrangler.jsonc
+.git

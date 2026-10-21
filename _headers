@@ -1,6 +1,3 @@
-# Cloudflare Pages headers.
-# https://developers.cloudflare.com/pages/configuration/headers/
-
 /*
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
@@ -21,7 +18,6 @@
 /sw.js
   Cache-Control: no-cache, no-store, must-revalidate, max-age=0
 
-# The manifest is fetched rarely and changes rarely.
 /manifest.webmanifest
   Cache-Control: public, max-age=3600
 

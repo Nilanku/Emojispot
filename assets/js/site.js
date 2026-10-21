@@ -176,8 +176,31 @@
     const sysDark = matchMedia('(prefers-color-scheme: dark)').matches;
     const resolved = state.theme === 'auto' ? (sysDark ? 'dark' : 'light') : state.theme;
     root.dataset.theme = resolved;
-    const meta = $('meta[name="theme-color"]');
-    if (meta) meta.setAttribute('content', resolved === 'dark' ? '#0e0e10' : '#ffffff');
+    /* The head ships two theme-color metas with prefers-color-scheme media
+       queries, which is correct while the reader is on "auto". Once they pick
+       light or dark explicitly, those queries describe the wrong thing, so
+       they are swapped for one plain meta. Going back to "auto" restores the
+       pair. The old code edited the first meta in place, which silently
+       destroyed the media-query pair after the first toggle. */
+    const head = document.head;
+    head.querySelectorAll('meta[data-tc]').forEach(m => m.remove());
+    if (state.theme === 'auto') {
+      [['light', '#ffffff'], ['dark', '#0e0e10']].forEach(([scheme, colour]) => {
+        const m = document.createElement('meta');
+        m.name = 'theme-color';
+        m.content = colour;
+        m.media = `(prefers-color-scheme: ${scheme})`;
+        m.dataset.tc = '1';
+        head.appendChild(m);
+      });
+    } else {
+      const m = document.createElement('meta');
+      m.name = 'theme-color';
+      m.content = resolved === 'dark' ? '#0e0e10' : '#ffffff';
+      m.dataset.tc = '1';
+      head.appendChild(m);
+    }
+    head.querySelectorAll('meta[name="theme-color"]:not([data-tc])').forEach(m => m.remove());
     $$('[data-theme-opt]').forEach(b => b.setAttribute('aria-checked', String(b.dataset.themeOpt === state.theme)));
   }
   matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
@@ -304,14 +327,44 @@
     });
   }
 
+  /* ---------------------------------------------------------------- URLs */
+  /* Switching language keeps you on the same page — unless this page has no
+     version in that language, in which case it takes you to that language's
+     home instead of a 404. PAGE.langs lists the languages a page actually
+     exists in; it is only set on pages that are not fully translated. */
+  function localizedURL(target) {
+    const path = location.pathname
+      .replace(/^\/(hi|es|ar|pt|fr|de|id)(?=\/|$)/, '') || '/';
+    const available = !PAGE.langs || PAGE.langs.includes(target);
+    const dest = available ? path : '/';
+    return target === 'en' ? dest : '/' + target + dest;
+  }
+
   /* ---------------------------------------------------------------- grid */
+  /* Where an emoji's own page lives, for this page's language.
+     PAGE.ep is emitted by the generator and already accounts for the fact that
+     only some languages have translated emoji pages: a French grid points at
+     the English page rather than at a URL that would 404. */
+  function emojiURL(i) {
+    const slug = state.data.slugs && state.data.slugs[i];
+    if (!slug) return null;
+    return (PAGE.ep || '/emoji/') + slug + '/';
+  }
+
   function cellHTML(i) {
     const e = state.data.emoji[i];
     const nm = nameOf(i);
     const sel = state.tray.has(e.c);
-    return `<button class="cell${sel ? ' is-selected' : ''}" data-i="${i}" data-c="${esc(e.c)}"
+    const href = emojiURL(i);
+    const inner = `${esc(baseOf(i))}${e.tv ? '<span class="tone-dot" aria-hidden="true"></span>' : ''}`;
+    const attrs = `class="cell${sel ? ' is-selected' : ''}" data-i="${i}" data-c="${esc(e.c)}"
       title="${esc(nm)}" aria-label="${esc(nm)}"
-      ${e.tv ? 'data-toned="1"' : ''}>${esc(baseOf(i))}${e.tv ? '<span class="tone-dot" aria-hidden="true"></span>' : ''}</button>`;
+      ${e.tv ? 'data-toned="1"' : ''}`;
+    // An anchor so a click without JavaScript still goes somewhere. The
+    // delegated handler below prevents the navigation and copies instead.
+    return href
+      ? `<a ${attrs} href="${href}">${inner}</a>`
+      : `<button ${attrs} type="button">${inner}</button>`;
   }
 
   function renderGrid(container, indices) {
@@ -736,12 +789,17 @@
     if (PAGE.page === 'home') syncToneToggle();   // grid renders on demand here
     else setView('all');
     enablePWA();
+    enableCookieBanner();
     suggestLanguage();
 
     /* --- global click handling for cells (delegated) --- */
     document.addEventListener('click', (ev) => {
       const cell = ev.target.closest('.cell');
       if (cell) {
+        /* Cells are links now. Without this, a tap would navigate to the emoji
+           page instead of copying — which is the whole point of the site. The
+           href stays for crawlers, middle-click and "open in new tab". */
+        if (cell.tagName === 'A') ev.preventDefault();
         if (cell.dataset.variant) {
           const g = cell.dataset.c;
           copy(g, g).then((ok) => {
@@ -878,10 +936,7 @@
 
     // language menu: preserve current path when switching
     $$('[data-lang-go]').forEach(a => a.addEventListener('click', () => {
-      const target = a.dataset.langGo;
-      const path = location.pathname
-        .replace(/^\/(hi|es|ar|pt|fr|de|id)(?=\/|$)/, '') || '/';
-      location.href = target === 'en' ? path : '/' + target + path;
+      location.href = localizedURL(a.dataset.langGo);
     }));
 
     // deep link: #e=😀
@@ -910,12 +965,51 @@
       <button class="btn btn-sm" data-lang-dismiss>${esc(t('lang_switch_no'))}</button>`;
     bar.dataset.show = 'true';
     $('[data-lang-accept]', bar).addEventListener('click', () => {
-      const path = location.pathname.replace(/^\/(hi|es|ar|pt|fr|de|id)(?=\/|$)/, '') || '/';
-      location.href = '/' + wanted + path;
+      location.href = localizedURL(wanted);
     });
     $('[data-lang-dismiss]', bar).addEventListener('click', () => {
       store.set(LS.langDismissed, Date.now());
       bar.dataset.show = 'false';
+    });
+  }
+
+  /* ------------------------------------------------------- cookie notice */
+  /* OFF on purpose. EmojiSpot sets no cookies today, so showing a consent bar
+     now would be noise. Flip this to true on the same day the first ad or
+     analytics script goes live — the bar then appears until the reader picks,
+     and their pick is remembered on their device.
+
+     The choice is exposed as window.EMOJISPOT_CONSENT so an ad snippet can
+     check it before initialising. Nothing in this file sets a cookie itself. */
+  const COOKIE_BANNER = false;
+
+  function enableCookieBanner() {
+    if (!COOKIE_BANNER || document.getElementById('cookie-bar')) return;
+    const KEY = 'ed:consent';
+    if (store.get(KEY, null)) return;
+
+    const bar = document.createElement('div');
+    bar.className = 'cookie-bar';
+    bar.id = 'cookie-bar';
+    bar.setAttribute('role', 'region');
+    bar.setAttribute('aria-label', t('cookie_link'));
+    bar.innerHTML = `<div class="wrap cookie-inner">
+        <p>${esc(t('cookie_text'))}
+          <a href="/${PAGE.lang === 'en' ? '' : PAGE.lang + '/'}privacy/">${esc(t('cookie_link'))}</a></p>
+        <div class="cookie-actions">
+          <button class="btn btn-sm btn-primary" data-consent="yes">${esc(t('cookie_accept'))}</button>
+          <button class="btn btn-sm" data-consent="no">${esc(t('cookie_reject'))}</button>
+        </div>
+      </div>`;
+    document.body.appendChild(bar);
+
+    bar.addEventListener('click', (ev) => {
+      const btn = ev.target.closest('[data-consent]');
+      if (!btn) return;
+      const granted = btn.dataset.consent === 'yes';
+      store.set(KEY, { ok: granted, at: Date.now() });
+      window.EMOJISPOT_CONSENT = granted;
+      bar.remove();
     });
   }
 

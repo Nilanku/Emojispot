@@ -6,7 +6,7 @@
  * rebuilt. Network-first guarantees fresh content when online, and the cache
  * still takes over the moment the network is unavailable.
  */
-const CACHE = 'emoji-v4';
+const CACHE = 'emoji-v5';
 const CORE = ['/', '/data/emoji.json', '/data/i18n.json',
               '/assets/css/site.css', '/assets/js/site.js'];
 

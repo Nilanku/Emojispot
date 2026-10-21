@@ -1,0 +1,11 @@
+{
+  // Cloudflare Workers static assets.
+  // "directory" is the repo root because the whole site is committed there.
+  "name": "emojispot",
+  "compatibility_date": "2026-05-03",
+  "assets": {
+    "directory": "./",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page"
+  }
+}
