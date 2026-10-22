@@ -1074,4 +1074,67 @@
       return report;
     },
   };
+
+  /* --- copy buttons on the server-rendered emoji pages -----------------
+     Those pages mark their buttons [data-copy-emoji] / [data-copy-text].
+     Nothing in this file listened for them, so the primary Copy button did
+     nothing at all. Handled here so one file fixes every emoji page. */
+  document.addEventListener('click', (ev) => {
+    const el = ev.target.closest('[data-copy-emoji],[data-copy-text]');
+    if (!el) return;
+    ev.preventDefault();
+    const text = el.getAttribute('data-copy-emoji') || el.getAttribute('data-copy-text') || '';
+    if (text) copy(text, text);
+  }, true);
+  document.addEventListener('keydown', (ev) => {
+    if (ev.key !== 'Enter' && ev.key !== ' ') return;
+    const el = ev.target.closest && ev.target.closest('[data-copy-emoji]');
+    if (!el) return;
+    ev.preventDefault();
+    const text = el.getAttribute('data-copy-emoji') || '';
+    if (text) copy(text, text);
+  });
+
+  /* --- keep the hard-coded category counts honest ----------------------
+     Pages are pre-rendered, so their nav counts are baked in at build time.
+     If data/emoji.json gains emoji before every page is rebuilt, those
+     numbers drift. Recalculate them from the data the page already loaded. */
+  (function syncStaticCounts() {
+    const paint = () => {
+      if (!state.data || !state.data.emoji) return;
+      const gc = {}, sc = {};
+      for (const e of state.data.emoji) {
+        gc[e.g] = (gc[e.g] || 0) + 1;
+        sc[e.s] = (sc[e.s] || 0) + 1;
+      }
+      const gslug = {}, sslug = {}, sg = {};
+      (state.data.groups || []).forEach((g, i) => { gslug[g.slug] = i; });
+      (state.data.subgroups || []).forEach((x, i) => { sslug[x.slug] = i; sg[x.slug] = x.g; });
+      document.querySelectorAll('nav a[href] span.n').forEach((span) => {
+        const a = span.closest('a');
+        if (!a) return;
+        const parts = a.getAttribute('href').split('/').filter(Boolean);
+        if (parts.length === 1 && gslug[parts[0]] !== undefined) {
+          const n = gc[gslug[parts[0]]];
+          if (n && span.textContent !== String(n)) span.textContent = n;
+        } else if (parts.length === 2 && sslug[parts[1]] !== undefined) {
+          const n = sc[sslug[parts[1]]];
+          if (n && span.textContent !== String(n)) span.textContent = n;
+        }
+      });
+      const v = state.data.version;
+      if (v) {
+        document.querySelectorAll('.footer-bottom, .footer-bottom *').forEach((el) => {
+          if (el.children.length === 0 && /Unicode Emoji \d/.test(el.textContent)) {
+            el.textContent = el.textContent.replace(/Unicode Emoji \d+(\.\d+)?/g, 'Unicode Emoji ' + v);
+          }
+        });
+      }
+    };
+    if (state.data) paint();
+    else {
+      const t = setInterval(() => { if (state.data) { clearInterval(t); paint(); } }, 120);
+      setTimeout(() => clearInterval(t), 8000);
+    }
+  })();
 })();
