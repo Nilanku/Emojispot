@@ -166,7 +166,11 @@
   const keywordsOf = (i) => state.pack.keywords[i] || [];
 
   const baseOf = (i) => {
-    const e = state.data.emoji[i];
+    const e = state.data && state.data.emoji ? state.data.emoji[i] : null;
+    /* The data file can be a version behind the HTML (a cached emoji.json from
+       before a data update). Returning '' instead of throwing lets the caller
+       fall back to the character that is already in the markup. */
+    if (!e) return '';
     return e.tv ? (state.tone > 0 ? e.tv[state.tone - 1] : e.c) : e.c;
   };
 
@@ -744,7 +748,9 @@
 
   /* --------------------------------------------------------------- init */
   async function loadJSON(url) {
-    const r = await fetch(url, { cache: 'force-cache' });
+    /* revalidate instead of force-cache: a stale emoji.json leaves the newest
+       emoji without a data entry, which breaks copying and tone data */
+    const r = await fetch(url, { cache: 'no-cache' });
     if (!r.ok) throw new Error(url + ' → ' + r.status);
     return r.json();
   }
@@ -814,7 +820,8 @@
         if (state.selectMode || ev.metaKey || ev.ctrlKey) {
           toggleTray(i); pushRecent(i); return;
         }
-        const g = baseOf(i);
+        const g = baseOf(i) || cell.dataset.c || '';
+        if (!g) return;
         copy(g, g).then((ok) => {
           if (!ok) return;
           cell.classList.add('is-copied');
@@ -1136,5 +1143,44 @@
       const t = setInterval(() => { if (state.data) { clearInterval(t); paint(); } }, 120);
       setTimeout(() => clearInterval(t), 8000);
     }
+  })();
+
+  /* --- self-heal an out-of-date data file -------------------------------
+     Pages are pre-rendered, so after a data update the HTML can list emoji
+     that an older cached data/emoji.json does not contain. Every lookup by
+     index then returns undefined, which is why a few tiles silently stop
+     copying. Detect the mismatch once, refetch past the cache, repaint. */
+  (function healStaleData() {
+    let done = false;
+    const check = () => {
+      if (done || !state.data || !state.data.emoji) return;
+      let maxI = -1;
+      document.querySelectorAll('.cell[data-i]').forEach((c) => {
+        const i = Number(c.dataset.i);
+        if (Number.isFinite(i) && i > maxI) maxI = i;
+      });
+      if (maxI < state.data.emoji.length) { done = true; return; }
+      done = true;
+      const base = document.body.dataset.base || '/';
+      const bust = '?v=' + Date.now();
+      Promise.all([
+        fetch(base + 'data/emoji.json' + bust, { cache: 'reload' }).then((r) => r.json()),
+        fetch(base + 'data/locales/' + PAGE.lang + '.json' + bust, { cache: 'reload' })
+          .then((r) => r.json()).catch(() => null),
+      ]).then(([data, pack]) => {
+        if (!data || !data.emoji || !data.emoji.length) return;
+        state.data = data;
+        if (pack && pack.names) state.pack = pack;
+        state.byChar = new Map(data.emoji.map((e, i) => [e.c, i]));
+        if (typeof setView === 'function') setView('all');
+        document.dispatchEvent(new CustomEvent('ed:data-healed'));
+      }).catch(() => {});
+    };
+    let tries = 0;
+    const t = setInterval(() => {
+      tries += 1;
+      if (state.data) { clearInterval(t); check(); }
+      else if (tries > 80) clearInterval(t);
+    }, 120);
   })();
 })();
