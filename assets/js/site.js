@@ -800,6 +800,7 @@
 
     /* --- global click handling for cells (delegated) --- */
     document.addEventListener('click', (ev) => {
+      if (Date.now() < suppressClickUntil) { ev.preventDefault(); ev.stopPropagation(); return; }
       const cell = ev.target.closest('.cell');
       if (cell) {
         /* Cells are links now. Without this, a tap would navigate to the emoji
@@ -843,17 +844,35 @@
       }
     });
 
-    /* --- long-press / hover-info opens the detail sheet --- */
+    /* --- long-press / right-click opens the detail sheet --- */
     let pressTimer = null;
+    let suppressClickUntil = 0;
     document.addEventListener('pointerdown', (ev) => {
       const cell = ev.target.closest('.cell');
       if (!cell || ev.pointerType === 'mouse') return;
       pressTimer = setTimeout(() => {
         pressTimer = null;
+        const i = Number(cell.dataset.i);
+        if (!Number.isFinite(i)) return;
+        /* The finger is still down when the sheet opens. When it lifts, the
+           browser fires the click at that point, which now hits the freshly
+           opened dialog/backdrop and closed it instantly. Swallow that one
+           click so the sheet survives the release. */
+        suppressClickUntil = Date.now() + 600;
         navigator.vibrate && navigator.vibrate(8);
-        openDetail(Number(cell.dataset.i));
+        openDetail(i);
       }, 460);
     }, { passive: true });
+
+    /* Desktop: right-click (or ctrl-click) an emoji for its details. */
+    document.addEventListener('contextmenu', (ev) => {
+      const cell = ev.target.closest && ev.target.closest('.cell');
+      if (!cell) return;
+      const i = Number(cell.dataset.i);
+      if (!Number.isFinite(i)) return;
+      ev.preventDefault();
+      openDetail(i);
+    });
     ['pointerup', 'pointercancel', 'pointermove'].forEach(evt =>
       document.addEventListener(evt, () => { if (pressTimer) { clearTimeout(pressTimer); pressTimer = null; } }, { passive: true }));
 
@@ -869,7 +888,11 @@
     const dlg = $('#detail');
     if (dlg) {
       $('#detail-close')?.addEventListener('click', () => dlg.close());
-      dlg.addEventListener('click', (ev) => { if (ev.target === dlg) dlg.close(); });
+      dlg.addEventListener('click', (ev) => {
+        /* ignore the tail of the long-press that opened it */
+        if (Date.now() < suppressClickUntil) return;
+        if (ev.target === dlg) dlg.close();
+      });
       dlg.addEventListener('close', () => {
         state.currentEmoji = null;
         if (state.lastFocus && state.lastFocus.focus) state.lastFocus.focus({ preventScroll: true });

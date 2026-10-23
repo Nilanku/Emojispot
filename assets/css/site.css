@@ -444,7 +444,7 @@ img, svg { display: block; max-width: 100%; }
   transform: translateY(-50%);
   display: grid;
   place-items: center;
-  width: 26px; height: 26px;
+  width: 30px; height: 30px;
   border-radius: 50%;
   color: var(--muted);
   opacity: 0;
@@ -475,7 +475,7 @@ img, svg { display: block; max-width: 100%; }
   gap: 4px;
 }
 .tone-btn {
-  width: 30px; height: 30px;
+  width: 34px; height: 34px;
   display: grid;
   place-items: center;
   font-family: var(--emoji);
@@ -603,6 +603,11 @@ img, svg { display: block; max-width: 100%; }
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(52px, 1fr));
   gap: 4px;
+  /* A few ZWJ sequences (e.g. skin-toned family/kiss emoji) lay out wider
+     than one grid column on devices whose font lacks the ligature. Clip that
+     overflow at the grid edge so it can never create a horizontal scrollbar
+     on the page, while the glyph itself still paints in full. */
+  overflow-x: clip;
 }
 
 /* The skin-tone pages group their cells by category, so #grid there contains

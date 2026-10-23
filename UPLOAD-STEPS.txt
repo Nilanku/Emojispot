@@ -1,0 +1,57 @@
+EmojiSpot - QA fix (23 October 2026)
+===================================
+
+WHAT THIS FIXES
+---------------
+1. The emoji detail card opens on a phone (press and hold) and STAYS open.
+   Before, it appeared and vanished the instant you lifted your finger.
+2. The same card now opens on a computer with a RIGHT-CLICK on any emoji.
+   Before, there was no way to reach it with a mouse at all.
+3. No more sideways scroll on phones (it happened on the skin-tone pages,
+   which were 14 pixels wider than the screen).
+4. Every translated page was one release behind: they showed 1,906 emoji
+   instead of 1,923, so the 17 new emoji were missing from the Hindi,
+   Spanish, Arabic, Portuguese, French, German and Indonesian categories,
+   and /hi/emoji/pickle/ + /es/emoji/pickle/ were "not found".
+   Now every translated category lists all 1,923 emoji, the counts are
+   correct, and all 17 new emoji have Hindi and Spanish pages of their own.
+5. Slightly bigger tap targets: skin-tone swatches and the small "x"
+   inside the search box.
+
+HOW TO UPLOAD (about 3 minutes)
+-------------------------------
+1. Go to https://github.com/Nilanku/Emojispot
+2. Click the green "Code" button, then "Upload files".
+3. Unzip this file on your computer. Drag EVERYTHING that is inside it
+   (the folders assets, hi, es, ar, pt, fr, de, id plus the two files
+   sitemap.xml and sw.js) onto the GitHub upload page.
+   Upload the folders themselves - not the zip file.
+   If GitHub complains about too many files at once, upload one folder
+   at a time: assets, then hi, then es, then the rest.
+4. Scroll down, write a short message such as
+   "QA fixes: detail card, phone width, translated pages" and click
+   "Commit changes".
+5. Cloudflare rebuilds on its own in about a minute.
+
+AFTER IT IS LIVE - 5 QUICK CHECKS
+---------------------------------
+1. On your phone press and hold any emoji for half a second
+   -> the detail card slides up and stays.
+2. On a laptop right-click any emoji -> the same card opens.
+3. Open /tone/light/ on your phone and drag left/right
+   -> the page must not wobble sideways.
+4. Open /hi/emoji/pickle/ -> a real page, not "not found".
+5. Open /hi/smileys-emotion/ -> 172 emoji, same as English.
+
+FILES IN THIS ZIP
+-----------------
+283 files:
+  assets/js/site.js   detail card open/close + right-click
+  assets/css/site.css no sideways scroll, bigger tap targets
+  sw.js               cache version bumped so phones pick up the fix
+  sitemap.xml         34 new translated pages added
+  hi/ es/ ar/ pt/ fr/ de/ id/   translated pages brought up to date
+                      (updated category and subcategory pages, plus 34
+                       brand new Hindi and Spanish emoji pages)
+
+Nothing else needs uploading - the English pages did not change.
