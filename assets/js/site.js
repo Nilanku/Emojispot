@@ -9,6 +9,7 @@
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
   const PAGE = window.__EMOJI__ || { lang: 'en', page: 'home' };
+  const GUIDE_SUMMARIES = {"cat-face": {"meaning": "🐱 commonly represents a cat, a pet, or a playful, cute mood.", "example": "My cat has claimed the sofa again 🐱"}, "crescent-moon": {"meaning": "🌙 can represent nighttime, a goodnight wish, a calm mood, or a crescent-moon symbol.", "example": "Sleep well—see you tomorrow 🌙"}, "eyes": {"meaning": "👀 often expresses attention, curiosity, anticipation, or noticing something interesting.", "example": "You said there was news—tell me more 👀"}, "face-blowing-a-kiss": {"meaning": "😘 commonly sends a kiss, affection, a warm goodbye, or playful thanks.", "example": "Goodnight, speak tomorrow 😘"}, "face-with-tears-of-joy": {"meaning": "😂 commonly means laughing hard or finding something very funny.", "example": "I watched that clip three times 😂"}, "fire": {"meaning": "🔥 can mean literal fire or heat, or praise something as excellent, exciting or attractive.", "example": "That guitar solo was amazing 🔥"}, "folded-hands": {"meaning": "🙏 commonly expresses thanks, prayer, a sincere request, or hope.", "example": "Thanks for helping me today 🙏"}, "glowing-star": {"meaning": "🌟 often highlights something special, excellent or encouraging, or represents a shining star.", "example": "You did a brilliant job today 🌟"}, "grinning-face-with-sweat": {"meaning": "😅 often expresses nervous laughter, embarrassment, or relief after a close call.", "example": "Nearly sent that to the wrong group 😅"}, "hot-beverage": {"meaning": "☕ can represent coffee, tea, another hot drink, or taking a break.", "example": "Fancy a coffee and a catch-up? ☕"}, "hundred-points": {"meaning": "💯 often means complete agreement, a perfect score, or wholehearted approval.", "example": "Exactly—that is what I meant 💯"}, "loudly-crying-face": {"meaning": "😭 can express deep sadness, intense laughter, or feeling overwhelmed by something touching.", "example": "That ending made me cry 😭"}, "party-popper": {"meaning": "🎉 commonly celebrates good news, a birthday, a milestone, or an achievement.", "example": "You passed—congratulations! 🎉"}, "pizza": {"meaning": "🍕 usually means pizza, ordering food, or making casual meal plans.", "example": "Pizza and a film tonight? 🍕"}, "pleading-face": {"meaning": "🥺 can express pleading, tenderness, vulnerability, or being moved by something sweet.", "example": "Could you save me a slice? 🥺"}, "rainbow": {"meaning": "🌈 can represent a rainbow, colour, hope, or LGBTQ+ pride and support.", "example": "A little colour after a grey week 🌈"}, "raising-hands": {"meaning": "🙌 commonly expresses celebration, enthusiastic agreement, or praise.", "example": "We finished the project! 🙌"}, "red-heart": {"meaning": "❤️ commonly expresses love, affection, appreciation, or support—not only romance.", "example": "Thanks for always being there ❤️"}, "rolling-on-the-floor-laughing": {"meaning": "🤣 commonly expresses exaggerated laughter or finding something hilariously absurd.", "example": "Your impression of me was too accurate 🤣"}, "skull": {"meaning": "💀 can mean “I'm dead” from laughter or embarrassment, as well as literal death or spooky themes.", "example": "That punchline finished me 💀"}, "smiling-face-with-heart-eyes": {"meaning": "😍 commonly expresses admiration, delight, or attraction toward someone or something.", "example": "That view is incredible 😍"}, "smiling-face-with-hearts": {"meaning": "🥰 commonly expresses affection, gratitude, feeling loved, or delight at something adorable.", "example": "That was such a thoughtful surprise 🥰"}, "smiling-face-with-smiling-eyes": {"meaning": "😊 commonly expresses warmth, friendliness, appreciation, or quiet happiness.", "example": "Thanks for checking in 😊"}, "smiling-face-with-sunglasses": {"meaning": "😎 can express confidence, a playful sense of cool, or enjoyment of sunny weather.", "example": "Tickets booked—holiday mode 😎"}, "sparkles": {"meaning": "✨ can suggest shine, beauty, magic, emphasis, or a fresh start.", "example": "A clean desk and a fresh start ✨"}, "sparkling-heart": {"meaning": "💖 commonly expresses affection, appreciation, or love with an extra decorative sparkle.", "example": "You made my day—thank you 💖"}, "sun": {"meaning": "☀️ can represent sunshine, warm weather, a good-morning wish, or optimism.", "example": "Good morning—hope you have a lovely day ☀️"}, "thinking-face": {"meaning": "🤔 can express consideration, curiosity, uncertainty, or scepticism.", "example": "Which route should we take? 🤔"}, "thumbs-up": {"meaning": "👍 commonly acknowledges a message or expresses agreement, approval, or encouragement.", "example": "That time works for me 👍"}, "two-hearts": {"meaning": "💕 commonly expresses affection, love, appreciation, or a warm connection.", "example": "So glad we got to catch up 💕"}, "face-with-thermometer": {"meaning": "🤒 usually means feeling sick, having a fever, or being unwell.", "example": "Not feeling great today—staying home 🤒"}};
   const LS = {
     theme: 'ed:theme', tone: 'ed:tone', fav: 'ed:fav', recent: 'ed:recent',
     density: 'ed:density', langDismissed: 'ed:lang-dismissed', tray: 'ed:tray',
@@ -106,7 +107,7 @@
       // display:none or off-screen element
       ta.style.cssText = 'position:fixed;top:0;left:0;width:1px;height:1px;' +
                          'padding:0;border:0;opacity:0;pointer-events:none';
-      document.body.appendChild(ta);
+      (document.querySelector('dialog[open]') || document.body).appendChild(ta);
       ta.focus({ preventScroll: true });
       ta.select();
       ta.setSelectionRange(0, text.length);   // iOS Safari needs this
@@ -588,7 +589,7 @@
     const kws = keywordsOf(i);
     const related = relatedTo(i, 12);
 
-    const htmlFor = `&#${e.cp.split(' ')[0]};`;
+    const htmlFor = Array.from(glyph, c => '&#x' + c.codePointAt(0).toString(16).toUpperCase() + ';').join('');
     const jsonFor = JSON.stringify({ emoji: e.c, name: nm, codepoints: e.cp, keywords: kws }, null, 2);
     const mdFor = e.c;
     const escFor = e.cp.split(' ').map(c => '\\u{' + c.toLowerCase() + '}').join('');
@@ -611,6 +612,14 @@
             title="${esc(nm)}">${esc(c)}</button>`).join('') + `</div></div>`
       : '';
 
+    const guideSlug = state.data.slugs?.[i];
+    const guide = GUIDE_SUMMARIES[guideSlug];
+    const summaryHTML = guide ? `<section class="detail-meaning" lang="en" dir="ltr" aria-label="Emoji meaning${PAGE.lang !== 'en' ? ' in English' : ''}">
+      <h3>Meaning${PAGE.lang !== 'en' ? ' <small>(English)</small>' : ''}</h3>
+      <p>${esc(guide.meaning)}</p><h3>Example</h3><p class="meaning-example">${esc(guide.example)}</p>
+      <a class="meaning-link" href="/emoji/${encodeURIComponent(guideSlug)}/#meaning"${PAGE.lang !== 'en' ? ' hreflang="en"' : ''}>Read the full meaning &amp; examples${PAGE.lang !== 'en' ? ' (English)' : ''} →</a>
+    </section>` : '';
+
     $('#detail-body').innerHTML = `
       <div class="detail-top">
         <div class="detail-glyph" id="detail-glyph">${esc(glyph)}</div>
@@ -622,6 +631,7 @@
         </div>
       </div>
 
+      ${summaryHTML}
       <div class="kv">
         <div class="kv-row">
           <span class="kv-label">${esc(t('count_label'))}</span>
@@ -651,8 +661,7 @@
 
         <div class="kv-row"><span class="kv-label">${esc(t('platform'))}</span>
           <div class="platforms">
-            ${['Apple', 'Android', 'Windows'].map(p => `<div class="platform">
-              <div class="p-glyph">${esc(glyph)}</div><div class="p-name">${esc(p)}</div></div>`).join('')}
+            <div class="platform"><div class="p-glyph">${esc(glyph)}</div></div>
           </div>
           <p class="platform-note">${esc(t('platform_note'))}</p></div>
 
@@ -1046,7 +1055,7 @@
   /* ----------------------------------------------------------------- PWA */
   function enablePWA() {
     if (!('serviceWorker' in navigator)) return;
-    window.addEventListener('load', () => {
+    const register = () => {
       navigator.serviceWorker.register((document.body.dataset.base || '/') + 'sw.js')
         .then((reg) => {
           // If a newer worker takes over, reload once so the reader is on the
@@ -1065,7 +1074,9 @@
           });
         })
         .catch(() => {});
-    });
+    };
+    if (document.readyState === 'complete') register();
+    else window.addEventListener('load', register, { once: true });
   }
 
   /* ------------------------------------------------------------------ go */
@@ -1104,6 +1115,26 @@
       return report;
     },
   };
+
+  function normalizeReferenceDisplay() {
+    const glyph = document.querySelector('main .detail-glyph[data-copy-emoji]')?.getAttribute('data-copy-emoji');
+    if (glyph) {
+      document.querySelectorAll('main [data-copy-text]').forEach(b => {
+        if ((b.dataset.copyText || '').startsWith('&#')) {
+          b.dataset.copyText = Array.from(glyph, c => '&#x' + c.codePointAt(0).toString(16).toUpperCase() + ';').join('');
+        }
+      });
+    }
+    document.querySelectorAll('main .platforms').forEach(box => {
+      if (box.children.length > 1) {
+        const first = box.firstElementChild;
+        first.querySelector('.p-name')?.remove();
+        box.replaceChildren(first);
+      }
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', normalizeReferenceDisplay);
+  else normalizeReferenceDisplay();
 
   /* --- copy buttons on the server-rendered emoji pages -----------------
      Those pages mark their buttons [data-copy-emoji] / [data-copy-text].

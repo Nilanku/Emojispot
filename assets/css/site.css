@@ -1249,3 +1249,29 @@ body:has(.tray[data-open="true"]) { padding-block-end: 140px; }
   .search input { padding-inline: 42px; font-size: 14px; }
   .groups { gap: 8px; }
 }
+
+/* Reviewed English guides and compact popup explanations — 2026-10-25 */
+.detail-meaning { border-block:1px solid var(--border); padding:18px 0; margin:20px 0 0; text-align:left; }
+.detail-meaning h3 { font-size:13px; font-weight:650; margin:0 0 6px; }
+.detail-meaning h3:not(:first-child) { margin-top:14px; }
+.detail-meaning p { font-size:14px; line-height:1.65; margin:0; }
+.detail-meaning small,.guide-note { color:var(--muted, #666); }
+.meaning-example { font-style:italic; }
+.meaning-link { display:inline-block; font-size:14px; font-weight:600; text-decoration:underline; text-underline-offset:4px; padding-block:12px 4px; overflow-wrap:anywhere; }
+.emoji-guide { max-width:760px; margin:32px 0; line-height:1.8; scroll-margin-top:90px; }
+.emoji-guide h2 { margin:28px 0 10px; font-size:22px; line-height:1.35; }
+.emoji-guide h3 { margin:18px 0 8px; font-size:17px; line-height:1.5; }
+.emoji-guide p { margin:10px 0; }
+.emoji-guide ul { padding-inline-start:22px; }
+.emoji-guide li { margin-block:6px; }
+.emoji-guide blockquote { margin:16px 0; padding:14px 18px; border-inline-start:3px solid #f5c518; background:var(--surface, #f5f5f5); border-radius:0 8px 8px 0; }
+.combos { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; margin:16px 0; }
+.combo { display:flex; flex-direction:column; align-items:flex-start; gap:6px; padding:14px; border:1px solid var(--border); border-radius:12px; background:var(--surface,#f5f5f5); color:inherit; text-align:left; cursor:pointer; min-width:0; }
+.combo b { font-size:25px; font-weight:400; overflow-wrap:anywhere; }
+.combo span { font-size:12px; line-height:1.5; }
+.combo:hover { border-color:#d7ae00; }
+.combo:focus-visible,.meaning-link:focus-visible { outline:3px solid #b48e00; outline-offset:3px; }
+.guide-related { display:flex; flex-wrap:wrap; gap:10px; }
+.guide-related a { border:1px solid var(--border); border-radius:8px; padding:8px 12px; text-decoration:underline; text-underline-offset:3px; }
+.guide-note { font-size:13px; }
+@media(max-width:380px) { .combos { grid-template-columns:1fr; } .emoji-guide h2 { font-size:20px; } }
