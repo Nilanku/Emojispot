@@ -1238,3 +1238,23 @@
     }, 120);
   })();
 })();
+
+/* Meanings directory navigation on legacy pages; key entry pages have static links. */
+(() => {
+  const add = () => {
+    const header = document.querySelector('.header-inner');
+    const label = document.documentElement.lang === 'en' ? 'Emoji Meanings' : 'Emoji Meanings (English)';
+    if (header && !header.querySelector('.meanings-nav')) {
+      const nav = document.createElement('nav'); nav.className = 'meanings-nav';
+      nav.setAttribute('aria-label', 'Emoji meanings'); nav.lang = 'en'; nav.dir = 'ltr';
+      const a = document.createElement('a'); a.href = '/emoji-meanings/'; a.textContent = label;
+      nav.append(a); header.querySelector('.brand')?.after(nav);
+    }
+    const groups = document.querySelectorAll('.site-footer .footer-grid > div');
+    const host = groups[groups.length - 1]?.querySelector('.footer-links');
+    if (host && !host.querySelector('a[href="/emoji-meanings/"]')) {
+      const a = document.createElement('a'); a.href = '/emoji-meanings/'; a.textContent = label; a.lang = 'en'; host.prepend(a);
+    }
+  };
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', add); else add();
+})();
