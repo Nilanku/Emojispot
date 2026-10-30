@@ -1258,3 +1258,20 @@
   };
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', add); else add();
 })();
+
+/* Guides navigation for legacy pages. Key entry pages also have static links. */
+(() => {
+  const add = () => {
+    const nav = document.querySelector('.meanings-nav');
+    const label = document.documentElement.lang === 'en' ? 'Guides' : 'Guides (English)';
+    if (nav && !nav.querySelector('a[href="/guides/"]')) {
+      const a = document.createElement('a'); a.href = '/guides/'; a.textContent = label; a.lang = 'en'; nav.append(a);
+    }
+    const cols = document.querySelectorAll('.site-footer .footer-grid > div');
+    const host = cols[cols.length - 1]?.querySelector('.footer-links');
+    if (host && !host.querySelector('a[href="/guides/"]')) {
+      const a = document.createElement('a'); a.href = '/guides/'; a.textContent = label; a.lang = 'en'; host.prepend(a);
+    }
+  };
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', add); else add();
+})();

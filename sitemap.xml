@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://emojispot.world/</loc><lastmod>2026-10-26</lastmod></url>
+  <url><loc>https://emojispot.world/</loc></url>
   <url><loc>https://emojispot.world/faq/</loc><lastmod>2026-10-20</lastmod></url>
   <url><loc>https://emojispot.world/tone/light/</loc><lastmod>2026-10-20</lastmod></url>
   <url><loc>https://emojispot.world/tone/medium-light/</loc><lastmod>2026-10-20</lastmod></url>
@@ -1114,13 +1114,13 @@
   <url><loc>https://emojispot.world/emoji/oncoming-fist/</loc><lastmod>2026-10-20</lastmod></url>
   <url><loc>https://emojispot.world/emoji/left-facing-fist/</loc><lastmod>2026-10-20</lastmod></url>
   <url><loc>https://emojispot.world/emoji/right-facing-fist/</loc><lastmod>2026-10-20</lastmod></url>
-  <url><loc>https://emojispot.world/emoji/clapping-hands/</loc><lastmod>2026-10-20</lastmod></url>
-  <url><loc>https://emojispot.world/emoji/raising-hands/</loc><lastmod>2026-10-25</lastmod></url>
+  <url><loc>https://emojispot.world/emoji/clapping-hands/</loc></url>
+  <url><loc>https://emojispot.world/emoji/raising-hands/</loc></url>
   <url><loc>https://emojispot.world/emoji/heart-hands/</loc><lastmod>2026-10-20</lastmod></url>
   <url><loc>https://emojispot.world/emoji/open-hands/</loc><lastmod>2026-10-20</lastmod></url>
   <url><loc>https://emojispot.world/emoji/palms-up-together/</loc><lastmod>2026-10-20</lastmod></url>
   <url><loc>https://emojispot.world/emoji/handshake/</loc><lastmod>2026-10-20</lastmod></url>
-  <url><loc>https://emojispot.world/emoji/folded-hands/</loc><lastmod>2026-10-25</lastmod></url>
+  <url><loc>https://emojispot.world/emoji/folded-hands/</loc></url>
   <url><loc>https://emojispot.world/emoji/writing-hand/</loc><lastmod>2026-10-20</lastmod></url>
   <url><loc>https://emojispot.world/emoji/nail-polish/</loc><lastmod>2026-10-20</lastmod></url>
   <url><loc>https://emojispot.world/emoji/selfie/</loc><lastmod>2026-10-20</lastmod></url>
@@ -6688,5 +6688,7 @@
   <url><loc>https://emojispot.world/es/emoji/meteor/</loc><lastmod>2026-10-23</lastmod></url>
   <url><loc>https://emojispot.world/es/emoji/eraser/</loc><lastmod>2026-10-23</lastmod></url>
   <url><loc>https://emojispot.world/es/emoji/net-with-handle/</loc><lastmod>2026-10-23</lastmod></url>
-  <url><loc>https://emojispot.world/emoji-meanings/</loc><lastmod>2026-10-26</lastmod></url>
+  <url><loc>https://emojispot.world/emoji-meanings/</loc></url>
+<url><loc>https://emojispot.world/guides/</loc></url>
+<url><loc>https://emojispot.world/guides/folded-hands-vs-raising-hands-vs-clapping-hands/</loc></url>
 </urlset>
