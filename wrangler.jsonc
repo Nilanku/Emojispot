@@ -1,10 +1,15 @@
 {
-  // Cloudflare Workers static assets.
-  // "directory" is the repo root because the whole site is committed there.
+  // The existing deployment runs this build before uploading static assets.
+  // Keep Cloudflare's deploy command as: npx wrangler deploy
   "name": "emojispot",
   "compatibility_date": "2026-05-03",
+  "send_metrics": false,
+  "build": {
+    "command": "npm run build",
+    "watch_dir": ["posts", "publishing"]
+  },
   "assets": {
-    "directory": "./",
+    "directory": "./dist",
     "html_handling": "auto-trailing-slash",
     "not_found_handling": "404-page"
   }

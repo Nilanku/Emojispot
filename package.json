@@ -1,0 +1,19 @@
+{
+  "name": "emojispot-static-publishing",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Build-time article publishing for the existing EmojiSpot static website",
+  "type": "module",
+  "engines": { "node": ">=22.12.0" },
+  "scripts": {
+    "build": "node publishing/build.mjs"
+  },
+  "dependencies": {
+    "cheerio": "1.2.0",
+    "markdown-it": "15.0.3",
+    "yaml": "2.9.1"
+  },
+  "devDependencies": {
+    "wrangler": "4.157.0"
+  }
+}
