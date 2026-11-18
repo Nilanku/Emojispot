@@ -7,6 +7,11 @@ published: true
 order: 30
 label: "Emoji troubleshooting"
 visual: "❓ 📱"
+hero_image:
+  src: "/assets/img/guides/emojis-showing-as-boxes/header.webp"
+  social_src: "/assets/img/guides/emojis-showing-as-boxes/header-social.jpg"
+  alt: "A phone shows a blank square where an emoji should appear, highlighted by a magnifying glass."
+  caption: "A missing-glyph box is a display-support problem, not simply a different emoji design."
 copy: []
 backlinks: []
 related_guides: ["why-emojis-look-different"]
@@ -32,6 +37,8 @@ Here’s how to narrow it down without resetting your phone or deleting your mes
 
 Unicode explains missing and unsupported emoji sequences in its [emoji specification](https://www.unicode.org/reports/tr51/). Its [encoding FAQ](https://www.unicode.org/faq/utf_bom.html) separately describes U+FFFD, the replacement character, as a possible response to invalid encoded text. You cannot reliably identify the original emoji from a generic replacement symbol alone.
 
+![A phone message shows an empty box where an emoji should appear, highlighted by a magnifying glass.](/assets/img/guides/emojis-showing-as-boxes/missing-glyph-explainer.webp "Compare the same message in another app to see whether the missing glyph is app-specific.")
+
 ## 1. Check whether the problem is limited to one app
 
 Copy the message into another trusted app, such as your device’s notes app. If possible, ask the sender what they see too.
@@ -51,6 +58,8 @@ Check your device’s official software-update settings and the app’s official
 **Updating a keyboard alone may not fix what you see.** Choosing an emoji and displaying it are different jobs. A keyboard may let you insert a character that another app or recipient cannot render.
 
 You do not need to start with a factory reset, an unofficial font installer or an unknown “emoji repair” app. Those are not sensible first steps for a missing symbol.
+
+![Two phones display the same message, with an emoji missing on one screen and supported on the other.](/assets/img/guides/emojis-showing-as-boxes/device-support-check.webp "An official update may add support, but cannot guarantee that every app or recipient supports every emoji.")
 
 ## 3. Copy the whole emoji, not just one piece
 
@@ -85,6 +94,20 @@ That keeps the conversation understandable without promising that a particular e
 If you can see emoji in messages but cannot find the keyboard, the problem is input rather than display support.
 
 On iPhone or iPad, Apple’s instructions are **Settings → General → Keyboard → Keyboards → Add New Keyboard → Emoji**. See [Apple’s emoji keyboard guide](https://support.apple.com/en-us/102507). This adds the keyboard; it does not guarantee that every app or recipient can display every emoji.
+
+## Frequently asked questions
+
+### Why do some emojis show as boxes?
+
+Often, the app or available font does not support that character or sequence. Compare the same message in another app before changing settings.
+
+### Will updating my phone fix every missing emoji?
+
+An official update may add support, but it cannot guarantee that every app or recipient supports every newer emoji sequence.
+
+### Should I reset my phone to fix one missing emoji?
+
+A reset is not a sensible first step. Check another app, look for official updates and make sure you copied the complete emoji sequence.
 
 ## A useful rule of thumb
 

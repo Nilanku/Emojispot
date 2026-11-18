@@ -7,6 +7,11 @@ published: true
 order: 20
 label: "Emoji explained"
 visual: "📱 💻"
+hero_image:
+  src: "/assets/img/guides/why-emojis-look-different/header.webp"
+  social_src: "/assets/img/guides/why-emojis-look-different/header-social.jpg"
+  alt: "Two phones display smiling emojis with different artwork styles."
+  caption: "The emoji character can stay the same even when the displayed artwork changes."
 copy: []
 backlinks: []
 related_guides: ["emojis-showing-as-boxes"]
@@ -33,6 +38,8 @@ That leaves room for differences in:
 
 So an emoji can be recognisable on both phones without looking exactly alike. A design difference is not, by itself, evidence that your message was corrupted.
 
+![Two phone screens show the same smiling emoji in different artwork styles.](/assets/img/guides/why-emojis-look-different/same-character-different-artwork.webp "The text can stay the same while each app draws its own version.")
+
 ## Why “iPhone emoji vs Android emoji” isn’t the whole story
 
 The operating system matters, but the app can matter too. Some software uses the device’s emoji font; other software supplies its own artwork or rendering system. Unicode’s [emoji specification](https://www.unicode.org/reports/tr51/) discusses both font-based rendering and other approaches to emoji presentation.
@@ -55,6 +62,8 @@ Here are the main pieces:
 For example, copy ❤️ into a note and then into a message. The heart may look different even though you copied the same text. Unicode’s [emoji specification](https://www.unicode.org/reports/tr51/) distinguishes the underlying characters and sequences from their visual presentation.
 
 That is also how EmojiSpot’s text-copy buttons work. They copy the emoji text, not an Apple-style or Android-style image. A preview labelled “on your device” shows your rendering environment’s version; it is not a promise about what the recipient will see.
+
+![A smiling emoji travels between two phones, where it appears in different visual styles.](/assets/img/guides/why-emojis-look-different/text-rendering-across-phones.webp "Copying plain emoji text transfers a character, not a picture of its artwork.")
 
 ## Why does an emoji sometimes turn black and white?
 
@@ -88,6 +97,20 @@ For an everyday message, a few words are usually the simpler solution:
 > “That was meant as a friendly joke 😊”
 
 That explains your intention better than hoping everyone sees exactly the same smile.
+
+## Frequently asked questions
+
+### Does a different-looking emoji mean the message changed?
+
+Usually, the character text is the same; what varies is the image an app uses to draw it. If you are unsure about the tone, ask or include words.
+
+### Can I make the recipient’s phone show my version?
+
+Not when you send plain emoji text. The recipient’s app and device choose the artwork. If the exact picture matters, send an image and describe it in words too.
+
+### Why can the same emoji look different in two apps on one phone?
+
+Apps can use different fonts or their own emoji artwork, so the app as well as the device can affect what you see.
 
 ## The takeaway
 

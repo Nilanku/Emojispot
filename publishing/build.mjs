@@ -68,13 +68,27 @@ function readPosts() {
     assert(data && typeof data==='object' && !Array.isArray(data),`${file}: metadata must be an object.`);
     assert(typeof data.published==='boolean',`${file}: published must be true or false.`);
     if(!data.published) continue;
-    const allowed=['title','seo_title','description','slug','published','order','label','visual','copy','backlinks','related_guides','date','updated'];
+    const allowed=['title','seo_title','description','slug','published','order','label','visual','copy','backlinks','related_guides','date','updated','hero_image'];
     for(const key of Object.keys(data)) assert(allowed.includes(key),`${file}: unknown metadata field ${key}`);
     const p={file, body:m[2], title:text(data.title,'title',file,180), seo:text(data.seo_title,'seo_title',file,180), description:text(data.description,'description',file,300), slug:text(data.slug,'slug',file,100), label:text(data.label,'label',file,60), visual:text(data.visual,'visual',file,100)};
     assert(/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(p.slug) && !['page','feed','index','rss'].includes(p.slug),`${file}: invalid or reserved slug.`);
     assert(Number.isSafeInteger(data.order),`${file}: order must be an integer.`); p.order=data.order;
     assert(Array.isArray(data.copy)&&data.copy.length<=20,`${file}: copy must be an array (maximum 20).`);
     p.copy=data.copy.map(x=>({emoji:text(x.emoji,'copy emoji',file,50),name:text(x.name,'copy name',file,100)}));
+    p.hero=null;
+    if(data.hero_image!==undefined) {
+      assert(data.hero_image && typeof data.hero_image==='object' && !Array.isArray(data.hero_image),`${file}: hero_image must be an object.`);
+      for(const key of Object.keys(data.hero_image)) assert(['src','social_src','alt','caption'].includes(key),`${file}: unknown hero_image field ${key}`);
+      const src=text(data.hero_image.src,'hero_image.src',file,300);
+      const socialSrc=data.hero_image.social_src===undefined?src:text(data.hero_image.social_src,'hero_image.social_src',file,300);
+      const alt=text(data.hero_image.alt,'hero_image.alt',file,300);
+      const caption=text(data.hero_image.caption,'hero_image.caption',file,300);
+      assert(src===`/assets/img/guides/${p.slug}/header.webp`,`${file}: hero image must use the article's local header.webp asset.`);
+      assert(socialSrc===src||socialSrc===`/assets/img/guides/${p.slug}/header-social.jpg`,`${file}: social_src must use the article's local header-social.jpg asset.`);
+      assert(fs.existsSync(path.join(ROOT,src.slice(1))),`${file}: missing hero image ${src}`);
+      assert(fs.existsSync(path.join(ROOT,socialSrc.slice(1))),`${file}: missing social preview image ${socialSrc}`);
+      p.hero={src,socialSrc,alt,caption};
+    }
     for(const field of ['backlinks','related_guides']) assert(Array.isArray(data[field])&&data[field].every(x=>typeof x==='string'),`${file}: ${field} must be a list of strings.`);
     p.backlinks=[...new Set(data.backlinks)]; p.related=[...new Set(data.related_guides)];
     for(const url of p.backlinks) assert(/^\/emoji\/[a-z0-9-]+\/$/.test(url),`${file}: backlinks must reference English /emoji/ pages.`);
@@ -109,9 +123,12 @@ function breadcrumbs(title,url) {
   if(url!=='/guides/') items.push({name:title,item:SITE+url});
   return {'@context':'https://schema.org','@type':'BreadcrumbList',itemListElement:items.map((x,i)=>({'@type':'ListItem',position:i+1,...x}))};
 }
-function metadata($,title,description,url,ld,type='website') {
+function metadata($,title,description,url,ld,type='website',socialImage=null) {
   $('title').text(title); $('link[rel="canonical"]').attr('href',SITE+url);
   for(const [attr,key,value] of [['name','description',description],['property','og:title',title],['property','og:description',description],['property','og:url',SITE+url],['property','og:type',type],['property','og:image:alt','EmojiSpot — emoji copy and paste'],['name','twitter:title',title],['name','twitter:description',description]]) {
+    let e=$(`meta[${attr}="${key}"]`); if(!e.length){$('head').append(`<meta ${attr}="${key}">`);e=$(`meta[${attr}="${key}"]`);} e.attr('content',value);
+  }
+  if(socialImage) for(const [attr,key,value] of [['property','og:image',SITE+(socialImage.socialSrc||socialImage.src)],['property','og:image:type',(socialImage.socialSrc||socialImage.src).endsWith('.jpg')?'image/jpeg':'image/webp'],['property','og:image:alt',socialImage.alt],['property','og:image:width','1200'],['property','og:image:height','630'],['name','twitter:card','summary_large_image'],['name','twitter:image',SITE+(socialImage.socialSrc||socialImage.src)],['name','twitter:image:alt',socialImage.alt]]) {
     let e=$(`meta[${attr}="${key}"]`); if(!e.length){$('head').append(`<meta ${attr}="${key}">`);e=$(`meta[${attr}="${key}"]`);} e.attr('content',value);
   }
   $('link[hreflang], script[type="application/ld+json"], link[rel="alternate"][type="application/rss+xml"]').remove();
@@ -121,7 +138,20 @@ function metadata($,title,description,url,ld,type='website') {
 }
 const card=p=>`<a class="editorial-card" href="${p.url}"><span class="editorial-visual" aria-hidden="true">${esc(p.visual)}</span><span class="editorial-card-copy"><span class="editorial-kicker">${esc(p.label)} · ${p.minutes} min read</span><h3>${esc(p.title)}</h3><p>${esc(p.description)}</p><span class="editorial-read">Read the guide →</span></span></a>`;
 function article(p,base,all) {
-  const b=load(md.render(p.body),{},false); b('h1').remove();
+  const b=load(md.render(p.body),{},false);
+  b('img').each((_,e)=>{
+    const img=b(e), src=img.attr('src')||'', alt=img.attr('alt')||'', caption=img.attr('title')||'';
+    assert(new RegExp(`^/assets/img/guides/${p.slug}/[a-z0-9-]+\.webp$`).test(src),`${p.file}: body images must use local WebP assets for this article.`);
+    assert(alt.trim().length>=20,`${p.file}: every body image needs descriptive alt text.`);
+    assert(caption.trim().length>=12,`${p.file}: every body image needs a useful caption.`);
+    assert(fs.existsSync(path.join(ROOT,src.slice(1))),`${p.file}: missing body image ${src}`);
+    img.removeAttr('title').attr({width:'1200',height:'900',loading:'lazy',decoding:'async'}).wrap('<figure class="article-figure"></figure>');
+    const figure=img.parent();
+    const paragraph=figure.parent();
+    if(paragraph.is('p')&&paragraph.children().length===1) paragraph.replaceWith(figure);
+    figure.append(`<figcaption>${esc(caption)}</figcaption>`);
+  });
+  b('h1').remove();
   b('a[href]').each((_,e)=>{const href=b(e).attr('href');if(href.startsWith(SITE+'/'))b(e).attr('href',href.slice(SITE.length));});
   b('table').each((i,e)=>{
     const table=b(e);const caption=`${p.title}: comparison ${i+1}`;
@@ -134,11 +164,12 @@ function article(p,base,all) {
   const introNodes=b('h2').first().prevAll().toArray().reverse();
   const intro=introNodes.map(e=>b.html(e)).join('');introNodes.forEach(e=>b(e).remove());
   const copy=p.copy.length?`<div class="article-copybar" role="group" aria-label="Copy an emoji">${p.copy.map(x=>`<button class="btn article-copy" type="button" data-copy-emoji="${esc(x.emoji)}" aria-label="Copy ${esc(x.name)}"><span aria-hidden="true">${esc(x.emoji)}</span><span>Copy ${esc(x.name)}</span></button>`).join('')}</div><noscript><p>One-tap Copy buttons need JavaScript. Select the emoji text and use your device’s Copy command instead.</p></noscript>`:'';
+  const hero=p.hero?`<figure class="article-hero"><img src="${esc(p.hero.src)}" alt="${esc(p.hero.alt)}" width="1200" height="630" fetchpriority="high" decoding="async"><figcaption>${esc(p.hero.caption)}</figcaption></figure>`:'';
   const related=all.filter(x=>p.related.includes(x.slug)&&x.slug!==p.slug);
   const $=cleanHTML(base);
-  $('main').html(`<div class="wrap editorial-wrap"><nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true"> › </span><a href="/guides/">Guides</a><span aria-hidden="true"> › </span><span aria-current="page">${esc(p.label)}</span></nav><article class="editorial-article" lang="en"><header class="article-header"><p class="editorial-kicker">${esc(p.label)}</p><h1>${esc(p.title)}</h1><p class="article-byline">By EmojiSpot · About ${p.minutes} minutes${p.date?` · Published <time datetime="${p.date}">${p.date}</time>`:''}${p.updated?` · Updated <time datetime="${p.updated}">${p.updated}</time>`:''}</p>${lede}<div class="article-intro">${intro}</div>${copy}</header><nav class="article-toc" aria-label="In this guide"><h2>In this guide</h2><ul>${toc.join('')}</ul></nav><div class="article-body">${b.html()}</div><aside class="article-end"><h2>Keep exploring</h2>${related.length?`<ul>${related.map(x=>`<li><a href="${x.url}">${esc(x.title)}</a></li>`).join('')}</ul>`:''}<p><a href="/guides/">All emoji guides</a> · <a href="/emoji-meanings/">Individual emoji meanings</a> · <a href="/">Find and copy emojis</a></p></aside></article></div>`);
-  const ld={'@context':'https://schema.org','@type':'Article',headline:p.title,description:p.description,url:SITE+p.url,mainEntityOfPage:SITE+p.url,inLanguage:'en',author:{'@type':'Organization',name:'EmojiSpot',url:SITE+'/about/'},publisher:{'@type':'Organization',name:'EmojiSpot',url:SITE+'/'},...(p.date?{datePublished:p.date}:{}),...(p.updated?{dateModified:p.updated}:{})};
-  metadata($,p.seo,p.description,p.url,[ld,breadcrumbs(p.title,p.url)],'article');
+  $('main').html(`<div class="wrap editorial-wrap"><nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true"> › </span><a href="/guides/">Guides</a><span aria-hidden="true"> › </span><span aria-current="page">${esc(p.label)}</span></nav><article class="editorial-article" lang="en"><header class="article-header"><p class="editorial-kicker">${esc(p.label)}</p><h1>${esc(p.title)}</h1><p class="article-byline">By EmojiSpot · About ${p.minutes} minutes${p.date?` · Published <time datetime="${p.date}">${p.date}</time>`:''}${p.updated?` · Updated <time datetime="${p.updated}">${p.updated}</time>`:''}</p>${lede}<div class="article-intro">${intro}</div>${hero}${copy}</header><nav class="article-toc" aria-label="In this guide"><h2>In this guide</h2><ul>${toc.join('')}</ul></nav><div class="article-body">${b.html()}</div><aside class="article-end"><h2>Keep exploring</h2>${related.length?`<ul>${related.map(x=>`<li><a href="${x.url}">${esc(x.title)}</a></li>`).join('')}</ul>`:''}<p><a href="/guides/">All emoji guides</a> · <a href="/emoji-meanings/">Individual emoji meanings</a> · <a href="/">Find and copy emojis</a></p></aside></article></div>`);
+  const ld={'@context':'https://schema.org','@type':'Article',headline:p.title,description:p.description,url:SITE+p.url,mainEntityOfPage:SITE+p.url,inLanguage:'en',author:{'@type':'Organization',name:'EmojiSpot',url:SITE+'/about/'},publisher:{'@type':'Organization',name:'EmojiSpot',url:SITE+'/'},...(p.hero?{image:SITE+(p.hero.socialSrc||p.hero.src)}:{}),...(p.date?{datePublished:p.date}:{}),...(p.updated?{dateModified:p.updated}:{})};
+  metadata($,p.seo,p.description,p.url,[ld,breadcrumbs(p.title,p.url)],'article',p.hero);
   return $.html();
 }
 function build() {
@@ -199,7 +230,7 @@ function build() {
   const changed=new Set(['/',...indexURLs,...backlinks.keys()].map(u=>SITE+u));
   sitemap=sitemap.replace(/<url>[\s\S]*?<\/url>/g,block=>changed.has(/<loc>([^<]+)<\/loc>/.exec(block)?.[1])?block.replace(/\s*<lastmod>[^<]+<\/lastmod>/g,''):block);
   assert(locs.length+extra.length<=50000 && Buffer.byteLength(sitemap)<50*1024*1024,'Sitemap needs splitting before publication.');write('sitemap.xml',sitemap);
-  write('assets/css/site.css',read('assets/css/site.css')+'\n/* Automatic editorial listings */\n.article-intro{font-size:16px;line-height:1.85}.article-intro p{margin:16px 0}.editorial-card + .editorial-card{margin-top:18px}.editorial-visual{flex-wrap:wrap;overflow-wrap:anywhere}.publisher-pagination{display:flex;gap:16px;align-items:center;justify-content:center;flex-wrap:wrap;margin-top:28px}.article-body ol,.article-end ul,.related-editorial ul{padding-inline-start:24px}.article-end li{margin-block:8px}\n');
+  write('assets/css/site.css',read('assets/css/site.css')+'\n/* Automatic editorial listings and article illustrations */\n.article-intro{font-size:16px;line-height:1.85}.article-intro p{margin:16px 0}.editorial-card + .editorial-card{margin-top:18px}.editorial-visual{flex-wrap:wrap;overflow-wrap:anywhere}.publisher-pagination{display:flex;gap:16px;align-items:center;justify-content:center;flex-wrap:wrap;margin-top:28px}.article-body ol,.article-end ul,.related-editorial ul{padding-inline-start:24px}.article-end li{margin-block:8px}.article-hero,.article-figure{margin:24px auto}.article-hero{max-width:980px}.article-hero img,.article-figure img{display:block;width:100%;max-width:100%;height:auto;border-radius:14px}.article-hero img{aspect-ratio:1200/630;object-fit:cover}.article-figure img{aspect-ratio:4/3;object-fit:cover}.article-hero figcaption,.article-figure figcaption{margin-top:8px;font-size:.9em;line-height:1.5;opacity:.82}\n');
   // Validate every local link/fragment and asset on every page the builder touched.
   for(const rel of [...new Set(generated)]) {
     const $=load(fs.readFileSync(output(rel),'utf8'));

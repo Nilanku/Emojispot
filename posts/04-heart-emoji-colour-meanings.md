@@ -7,6 +7,11 @@ published: true
 order: 40
 label: "Emoji meanings"
 visual: "❤️ 💙 💜"
+hero_image:
+  src: "/assets/img/guides/heart-emoji-colour-meanings/header.webp"
+  social_src: "/assets/img/guides/heart-emoji-colour-meanings/header-social.jpg"
+  alt: "Hearts in different colours float beside empty message bubbles."
+  caption: "Heart colours can add personality, but the message around them matters."
 copy: [{"emoji": "❤️", "name": "red heart"}, {"emoji": "🩷", "name": "pink heart"}, {"emoji": "🧡", "name": "orange heart"}, {"emoji": "💛", "name": "yellow heart"}, {"emoji": "💚", "name": "green heart"}, {"emoji": "💙", "name": "blue heart"}, {"emoji": "🩵", "name": "light blue heart"}, {"emoji": "💜", "name": "purple heart"}, {"emoji": "🤎", "name": "brown heart"}, {"emoji": "🖤", "name": "black heart"}, {"emoji": "🤍", "name": "white heart"}, {"emoji": "🩶", "name": "grey heart"}]
 backlinks: ["/emoji/red-heart/", "/emoji/blue-heart/", "/emoji/two-hearts/", "/emoji/sparkling-heart/"]
 related_guides: []
@@ -42,6 +47,8 @@ Here are some ways you *might* use the different hearts. The examples are sugges
 | 🩶 | Grey heart | Choose a muted colour for an affectionate or supportive message. |
 
 **None of these examples makes a colour exclusive to that use.** You can send a red heart to a friend, a yellow heart to a partner or a blue heart simply because you like blue.
+
+![Heart emojis in several colours float beside blank message bubbles.](/assets/img/guides/heart-emoji-colour-meanings/hearts-in-context.webp "The words and relationship—not a colour alone—provide context for a heart.")
 
 ## Does a red heart always mean romantic love?
 
@@ -111,7 +118,23 @@ Start with what you want to say, not a chart of supposedly safe colours.
 3. **Choose a colour you like or already share.** You don’t need a special reason.
 4. **Be clearer when the stakes are higher.** An emoji is not a reliable substitute for discussing feelings or offering meaningful support.
 
+![A palette of differently coloured heart shapes sits beside an empty message bubble.](/assets/img/guides/heart-emoji-colour-meanings/heart-colour-palette.webp "Choose a heart colour you like; no colour has one universal meaning.")
+
 App-generated badges are a separate case. If a heart appears automatically beside someone’s name, check that app’s explanation; it may have a defined product-specific meaning rather than the meaning of a heart someone typed.
+
+## Frequently asked questions
+
+### Can a heart colour tell me how someone feels?
+
+No. A colour alone is not a reliable code. Read the words and the relationship around it, or ask if the meaning matters.
+
+### Does a red heart always mean romance?
+
+No. It can express romance, friendship, gratitude, appreciation or support. The conversation makes the difference.
+
+### Which heart should I send?
+
+Choose one that fits your message or your usual style together. If your intention matters, say it in words instead of relying on a colour.
 
 ## The takeaway
 

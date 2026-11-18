@@ -7,6 +7,11 @@ published: true
 order: 10
 label: "Emoji comparison"
 visual: "😂 🤣 😭 💀"
+hero_image:
+  src: "/assets/img/guides/laughing-emojis-compared/header.webp"
+  social_src: "/assets/img/guides/laughing-emojis-compared/header-social.jpg"
+  alt: "A person laughs while reading a phone, with blank message bubbles nearby."
+  caption: "A funny message can prompt laughter, but the emoji you choose still depends on context."
 copy: [{"emoji": "😂", "name": "face with tears of joy"}, {"emoji": "🤣", "name": "rolling on the floor laughing"}, {"emoji": "😭", "name": "loudly crying face"}, {"emoji": "💀", "name": "skull"}]
 backlinks: ["/emoji/face-with-tears-of-joy/", "/emoji/rolling-on-the-floor-laughing/", "/emoji/loudly-crying-face/", "/emoji/skull/"]
 related_guides: []
@@ -30,6 +35,8 @@ There isn’t a perfect emoji for every joke. But knowing the differences can he
 | 💀 | Skull | “That finished me.” | “The last line 💀” |
 
 These examples illustrate possible tones, not a fixed scale of how funny something is. The names follow the [Unicode emoji list](https://www.unicode.org/emoji/charts/emoji-list.html); the conversational uses below draw on Emojipedia’s descriptions and the context of each message.
+
+![Four outlined faces in speech bubbles show a range of amused and laughing expressions.](/assets/img/guides/laughing-emojis-compared/reaction-comparison.webp "Reaction emojis can suggest different intensity, but people do not follow a strict scale.")
 
 ## 😂 Face with tears of joy: a straightforward laugh
 
@@ -115,6 +122,8 @@ You could answer:
 
 All four can work. The wording and your shared sense of humour do more to shape the reply than the emoji alone.
 
+![Two friends smile as they look at a phone displaying reaction icons.](/assets/img/guides/laughing-emojis-compared/context-changes-tone.webp "Context helps distinguish a playful reaction from one that may feel dismissive.")
+
 ## When a laughing reaction can land badly
 
 Before sending any of these, ask: **Am I laughing with this person, or could it look like I’m laughing at them?**
@@ -123,7 +132,7 @@ A friend joking about their own mistake may welcome a funny reply. Someone descr
 
 That matters at work, too. “The file is gone 😂” could sound dismissive when somebody is trying to fix a real problem. A clear, helpful sentence is more useful than an emoji meant to lighten the mood.
 
-## Quick questions
+## Frequently asked questions
 
 ### Is 😂 outdated?
 
