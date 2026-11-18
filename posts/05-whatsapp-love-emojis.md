@@ -3,15 +3,10 @@ title: "Love Emojis for WhatsApp: Copy and Paste Ideas"
 seo_title: "Love Emojis for WhatsApp: Copy and Paste Ideas | EmojiSpot"
 description: "Copy love emojis and WhatsApp message ideas for a partner or crush. Explore heart and affectionate-face combinations, with examples that leave room for context."
 slug: "whatsapp-love-emojis"
-published: false
+published: true
 order: 50
 label: "Messaging guide"
 visual: "❤️ 💕 🥰 😘"
-hero_image:
-  src: "/assets/img/guides/whatsapp-love-emojis/header.webp"
-  social_src: "/assets/img/guides/whatsapp-love-emojis/header-social.jpg"
-  alt: "Two people send warm messages on their phones, with blank chat bubbles and small hearts."
-  caption: "Choose words that sound like you, then add a love emoji if it fits."
 copy: [{"emoji": "❤️", "name": "red heart"}, {"emoji": "💕", "name": "two hearts"}, {"emoji": "🥰", "name": "smiling face with hearts"}, {"emoji": "😘", "name": "face blowing a kiss"}, {"emoji": "💘", "name": "heart with arrow"}, {"emoji": "💖", "name": "sparkling heart"}, {"emoji": "💌", "name": "love letter"}, {"emoji": "❤️‍🔥", "name": "heart on fire"}]
 backlinks: ["/emoji/red-heart/", "/emoji/two-hearts/", "/emoji/smiling-face-with-hearts/", "/emoji/face-blowing-a-kiss/", "/emoji/heart-with-arrow/", "/emoji/sparkling-heart/"]
 related_guides: ["heart-emoji-colour-meanings"]
@@ -40,8 +35,6 @@ For a quick selection, [browse and copy heart emojis](https://emojispot.world/sm
 
 These are possible readings, not definitions everyone follows. The same emoji can feel romantic in one chat, friendly in another or simply like the sender’s usual style. When in doubt, let your words do the explaining.
 
-![A phone shows heart emoji choices beside a copy-to-clipboard symbol.](/assets/img/guides/whatsapp-love-emojis/copy-paste-workflow.webp "Copy a heart emoji, paste it into your chat, and add your own words.")
-
 ## WhatsApp love messages you can personalize
 
 A short message usually sounds more natural when it says something specific. Borrow an idea below, then change it so it sounds like you:
@@ -63,8 +56,6 @@ For example, “I liked talking with you—would you like to get coffee this wee
 
 If you already trade affectionate messages, a heart or kiss may fit naturally. Pay attention to the conversation rather than treating a quick reply, a heart colour or a single emoji as proof of someone’s intentions.
 
-![Two people exchange a short affectionate message with one heart emoji.](/assets/img/guides/whatsapp-love-emojis/low-pressure-flirt.webp "A low-pressure message lets your words carry the invitation, with one emoji adding warmth.")
-
 ## Does a heart emoji on WhatsApp always mean romantic love?
 
 No. People use hearts for romance, friendship, family affection, encouragement, thanks and plenty of other reasons. Some send a particular colour because it suits a photo, a team or their personal style.
@@ -79,7 +70,7 @@ There is no reliable colour code that explains every WhatsApp message. Read the 
 
 You can also combine an emoji with your own sentence. The words give the recipient more context than the emoji by itself.
 
-## Frequently asked questions
+## Quick questions
 
 ### Which love emoji should I send to my partner?
 
