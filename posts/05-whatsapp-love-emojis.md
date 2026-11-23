@@ -3,7 +3,7 @@ title: "Love Emojis for WhatsApp: Copy and Paste Ideas"
 seo_title: "Love Emojis for WhatsApp: Copy and Paste Ideas | EmojiSpot"
 description: "Copy love emojis and WhatsApp message ideas for a partner or crush. Explore heart and affectionate-face combinations, with examples that leave room for context."
 slug: "whatsapp-love-emojis"
-published: false
+published: true
 order: 50
 label: "Messaging guide"
 visual: "❤️ 💕 🥰 😘"
