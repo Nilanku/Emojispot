@@ -1,0 +1,101 @@
+{
+  "title": "Emoji Combinations to Copy and Paste",
+  "seoTitle": "Emoji Combinations to Copy and Paste | EmojiSpot",
+  "description": "Copy themed emoji combinations for bios, captions and messages. Browse cute, aesthetic, love, friendship and celebration ideas—free and easy to use.",
+  "intro": "Pick a theme, search the list, and copy a sequence for your bio, caption or message. These are starting points, not fixed meanings—choose the combination that feels right for your context.",
+  "categories": [
+    {
+      "id": "cute-aesthetic",
+      "title": "Cute and aesthetic",
+      "description": "Soft, playful pairings for a profile, caption or everyday note.",
+      "items": [
+        {"sequence":"✨🫧","title":"Soft shimmer","spoken":"sparkles and bubbles","note":"A light, dreamy accent for a caption or profile line.","keywords":["cute","aesthetic","dreamy","soft"]},
+        {"sequence":"🌷🦋","title":"Spring day","spoken":"tulip and butterfly","note":"A fresh, floral feel for a bright photo.","keywords":["flower","garden","spring","pretty"]},
+        {"sequence":"☁️🤍","title":"Cloud-soft","spoken":"cloud and white heart","note":"A calm, gentle pairing for a short bio.","keywords":["cloud","white heart","soft","calm"]},
+        {"sequence":"🌙✨","title":"Night glow","spoken":"crescent moon and sparkles","note":"A quiet late-night mood or good-night caption.","keywords":["moon","night","stars","dreamy"]},
+        {"sequence":"🧸🫶","title":"Cozy support","spoken":"teddy bear and heart hands","note":"A warm, affectionate note for someone close.","keywords":["bear","hug","love","comfort"]},
+        {"sequence":"🐚🌊","title":"Coastal calm","spoken":"seashell and ocean wave","note":"A beachy pairing for a seaside photo.","keywords":["shell","ocean","beach","sea"]},
+        {"sequence":"🪷🌸","title":"Floral calm","spoken":"lotus and cherry blossom","note":"A flower-inspired combination with a soft tone.","keywords":["lotus","flower","blossom","calm"]},
+        {"sequence":"🧚🌼","title":"Whimsical garden","spoken":"fairy and blossom","note":"A playful, storybook-like mood for a caption.","keywords":["fairy","flower","magic","garden"]},
+        {"sequence":"🍓🎀","title":"Sweet detail","spoken":"strawberry and ribbon","note":"A cute finishing touch for a photo caption.","keywords":["strawberry","bow","sweet","pink"]},
+        {"sequence":"📖☕","title":"Reading break","spoken":"open book and hot beverage","note":"For slow mornings, reading breaks and bookish moments.","keywords":["book","coffee","tea","reading"]},
+        {"sequence":"🌱🌿","title":"Fresh start","spoken":"seedling and herb","note":"A simple nature-themed pairing for a new beginning.","keywords":["plant","green","growth","nature"]},
+        {"sequence":"🪞✨","title":"Little glow","spoken":"mirror and sparkles","note":"A small self-care or getting-ready caption.","keywords":["mirror","glow","beauty","sparkle"]}
+      ]
+    },
+    {
+      "id": "instagram-bio-captions",
+      "title": "Instagram bios and captions",
+      "description": "Quick combinations for travel, hobbies, photos and the little things you want to share.",
+      "items": [
+        {"sequence":"📍🌍","title":"Place and plans","spoken":"location pin and globe","note":"Add a location or a little context to a travel caption.","keywords":["travel","location","bio","where"]},
+        {"sequence":"☀️🌊","title":"Sun and sea","spoken":"sun and ocean wave","note":"A simple pairing for a sunny day or beach photo.","keywords":["summer","beach","ocean","holiday"]},
+        {"sequence":"📸✨","title":"Photo moment","spoken":"camera and sparkles","note":"Highlight a favourite snapshot or a small win.","keywords":["photo","picture","camera","shining"]},
+        {"sequence":"🎧🌙","title":"On repeat","spoken":"headphones and crescent moon","note":"For a song, playlist or late-night listening mood.","keywords":["music","song","playlist","night"]},
+        {"sequence":"🧳✈️","title":"Travel mode","spoken":"luggage and airplane","note":"A compact travel update for a bio or trip post.","keywords":["trip","flight","holiday","journey"]},
+        {"sequence":"🌿🍃","title":"Outside often","spoken":"herb and leaf fluttering in wind","note":"A fresh, outdoorsy accent for a nature photo.","keywords":["nature","plants","green","outside"]},
+        {"sequence":"📝☕","title":"Notes and coffee","spoken":"memo and hot beverage","note":"For a work-in-progress, study session or café visit.","keywords":["writing","study","coffee","work"]},
+        {"sequence":"🎨🖌️","title":"Making things","spoken":"artist palette and paintbrush","note":"A simple way to show a creative hobby or project.","keywords":["art","creative","painting","hobby"]},
+        {"sequence":"🍜😋","title":"Food finds","spoken":"steaming bowl and savoring food","note":"Share a meal or a dish you are looking forward to.","keywords":["food","meal","noodles","tasty"]},
+        {"sequence":"🌼☀️","title":"Bright days","spoken":"blossom and sun","note":"A cheerful accent for a sunny-day caption.","keywords":["flower","sunny","happy","day"]},
+        {"sequence":"🧘✨","title":"Mindful moment","spoken":"person in lotus position and sparkles","note":"For a quiet pause, stretch or mindful routine.","keywords":["meditation","wellbeing","calm","yoga"]},
+        {"sequence":"🎮🕹️","title":"Game time","spoken":"video game and joystick","note":"A playful bio detail for a gaming hobby.","keywords":["gaming","games","play","hobby"]}
+      ]
+    },
+    {
+      "id": "love-affection",
+      "title": "Love and affection",
+      "description": "Warm ideas for a partner, friend or family member—read them in the context of your relationship.",
+      "items": [
+        {"sequence":"❤️✨","title":"Warm and simple","spoken":"red heart and sparkles","note":"A direct, cheerful touch for a kind message.","keywords":["heart","love","warm","affection"]},
+        {"sequence":"💕🫶","title":"Affectionate","spoken":"two hearts and heart hands","note":"A sweet pairing for appreciation or closeness.","keywords":["hearts","love","care","support"]},
+        {"sequence":"🥰💗","title":"Sweet appreciation","spoken":"smiling face with hearts and growing heart","note":"For a thoughtful gesture or a moment that made you smile.","keywords":["love","thank you","sweet","cute"]},
+        {"sequence":"😘💌","title":"A little note","spoken":"face blowing a kiss and love letter","note":"A playful sign-off for someone you know well.","keywords":["kiss","letter","message","romance"]},
+        {"sequence":"💞🌙","title":"Good-night affection","spoken":"revolving hearts and crescent moon","note":"A gentle good-night message or evening caption.","keywords":["goodnight","night","heart","love"]},
+        {"sequence":"❤️‍🔥🌹","title":"Romantic and dramatic","spoken":"heart on fire and rose","note":"A bold, romantic accent when that tone suits your chat.","keywords":["romantic","rose","passion","love"]},
+        {"sequence":"💐💖","title":"Celebrating someone","spoken":"bouquet and sparkling heart","note":"For congratulations, gratitude or a special occasion.","keywords":["flowers","celebrate","love","gift"]},
+        {"sequence":"🤍🕊️","title":"Gentle support","spoken":"white heart and dove","note":"A quiet note of care, peace or encouragement.","keywords":["support","peace","white heart","care"]},
+        {"sequence":"💘🌷","title":"Playful romance","spoken":"heart with arrow and tulip","note":"A light romantic pairing for a card or message.","keywords":["romance","flower","crush","love"]},
+        {"sequence":"💌✨","title":"A kind message","spoken":"love letter and sparkles","note":"Add a little brightness to a note or thank-you.","keywords":["letter","note","thanks","message"]},
+        {"sequence":"🫶🌸","title":"Gentle affection","spoken":"heart hands and cherry blossom","note":"A soft way to show care without a long emoji string.","keywords":["care","heart hands","flower","affection"]},
+        {"sequence":"💓🎶","title":"Love for a song","spoken":"beating heart and musical notes","note":"For a song that brings someone or a memory to mind.","keywords":["music","song","heart","romantic"]}
+      ]
+    },
+    {
+      "id": "friendship-celebrations",
+      "title": "Friendship and celebrations",
+      "description": "Cheering, birthdays, plans and everyday moments worth sharing.",
+      "items": [
+        {"sequence":"🥳🎉","title":"Big news","spoken":"partying face and party popper","note":"Celebrate a milestone, announcement or good result.","keywords":["party","celebrate","news","congratulations"]},
+        {"sequence":"🎂🎈","title":"Birthday wish","spoken":"birthday cake and balloon","note":"A familiar birthday pairing for a card or message.","keywords":["birthday","cake","celebration","party"]},
+        {"sequence":"🤝💛","title":"Teamwork","spoken":"handshake and yellow heart","note":"For a shared win, collaboration or dependable friend.","keywords":["friendship","team","thanks","support"]},
+        {"sequence":"🙌✨","title":"We did it","spoken":"raising hands and sparkles","note":"Mark a small success or a goal reached together.","keywords":["success","celebrate","achievement","friends"]},
+        {"sequence":"🎊🪩","title":"Party energy","spoken":"confetti ball and mirror ball","note":"A lively accent for a party plan or celebration.","keywords":["party","dance","celebration","music"]},
+        {"sequence":"👏🎉","title":"Congratulations","spoken":"clapping hands and party popper","note":"Cheer someone on for a job well done.","keywords":["applause","congratulations","celebrate","well done"]},
+        {"sequence":"🧋💬","title":"Catch-up plans","spoken":"bubble tea and speech balloon","note":"Suggest a relaxed chat or a catch-up with a friend.","keywords":["friends","talk","chat","plans"]},
+        {"sequence":"🤗🌻","title":"A warm hello","spoken":"smiling face with open hands and sunflower","note":"Send a friendly greeting or a little encouragement.","keywords":["hello","hug","friendship","sunflower"]},
+        {"sequence":"💪🤝","title":"Cheering a friend","spoken":"flexed biceps and handshake","note":"A supportive note for a shared effort or challenge.","keywords":["support","teamwork","encouragement","friends"]},
+        {"sequence":"🍕🎬","title":"Movie night","spoken":"pizza and clapper board","note":"A quick way to suggest a relaxed film night.","keywords":["movie","film","pizza","plans"]},
+        {"sequence":"✅🎓","title":"Milestone","spoken":"check mark button and graduation cap","note":"Recognize a completed course, exam or goal.","keywords":["graduation","study","achievement","success"]},
+        {"sequence":"🎁💌","title":"A thoughtful gift","spoken":"wrapped gift and love letter","note":"For a present, thank-you card or small surprise.","keywords":["gift","present","card","thanks"]}
+      ]
+    },
+    {
+      "id": "desi-india-inspired",
+      "title": "Desi and India-inspired",
+      "description": "A few festive, food and everyday ideas; traditions and personal emoji use vary across people and regions.",
+      "items": [
+        {"sequence":"🪔✨","title":"Festival lights","spoken":"diya lamp and sparkles","note":"A festive light pairing, including for Diwali posts when it fits.","keywords":["diya","diwali","festival","lights","india","desi"]},
+        {"sequence":"🌼🪔","title":"Flowers and lights","spoken":"blossom and diya lamp","note":"For a festive decoration or a warm celebration at home.","keywords":["flower","diya","festival","celebration","india"]},
+        {"sequence":"🇮🇳❤️","title":"India pride","spoken":"India flag and red heart","note":"A personal expression of affection or pride connected to India.","keywords":["India","flag","pride","country","desi"]},
+        {"sequence":"🍛😋","title":"A meal you love","spoken":"curry rice and savoring food","note":"Share a dish you enjoy; regional foods and traditions are wonderfully varied.","keywords":["food","meal","curry","India","desi"]}
+      ]
+    }
+  ],
+  "faqs": [
+    {"question":"What is an emoji combination?","answer":"An emoji combination is a short sequence used together in a bio, caption or message. These pairings are ideas, not fixed codes."},
+    {"question":"How do I copy and paste one?","answer":"Choose Copy, then paste into the app or message field. If copying is unavailable in your browser, select the visible emoji sequence and use your device’s copy command."},
+    {"question":"Do emoji combinations have one meaning everywhere?","answer":"No. Emoji choices vary by person, platform and conversation. Add words when the meaning needs to be clear."},
+    {"question":"Will a combination look the same on every phone?","answer":"Not always. Devices and apps can draw the same emoji differently, even though the underlying characters are the same."}
+  ]
+}

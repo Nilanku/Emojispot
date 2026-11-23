@@ -1350,3 +1350,5 @@ body:has(.tray[data-open="true"]) { padding-block-end: 140px; }
  .article-lead { font-size:16px; }.article-toc ul { grid-template-columns:1fr; }.article-toc { padding:20px; }
  .article-body h2 { font-size:22px; }.article-body h3 { font-size:18px; }.article-body th,.article-body td { padding:10px; }.article-body table { min-width:510px; }.article-copybar .btn { flex:1 1 140px; justify-content:flex-start; }.guide-callout { padding:20px; }
 }
+.home-combinations-link { margin-block: 12px 16px; color: var(--muted); font-size: 13px; }
+.home-combinations-link a { color: var(--text); font-weight: 650; text-decoration: underline; text-underline-offset: 3px; }

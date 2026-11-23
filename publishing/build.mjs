@@ -172,6 +172,58 @@ function article(p,base,all) {
   metadata($,p.seo,p.description,p.url,[ld,breadcrumbs(p.title,p.url)],'article',p.hero);
   return $.html();
 }
+function combinationPage(base) {
+  const file='publishing/pages/emoji-combinations.json';
+  const data=JSON.parse(read(file));
+  const title=text(data.title,'title',file,180);
+  const seoTitle=text(data.seoTitle,'seoTitle',file,180);
+  const description=text(data.description,'description',file,300);
+  const intro=text(data.intro,'intro',file,500);
+  assert(Array.isArray(data.categories)&&data.categories.length>=4&&data.categories.length<=8,`${file}: provide 4–8 curated categories.`);
+  const ids=new Set(), sequences=new Set(); let total=0;
+  const categories=data.categories.map(raw=>{
+    assert(raw&&typeof raw==='object'&&!Array.isArray(raw),`${file}: category must be an object.`);
+    const id=text(raw.id,'category id',file,60);
+    assert(/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(id)&&!ids.has(id),`${file}: invalid or duplicate category id ${id}.`);ids.add(id);
+    const category={id,title:text(raw.title,'category title',file,100),description:text(raw.description,'category description',file,300)};
+    assert(Array.isArray(raw.items)&&raw.items.length>0,`${file}: each category needs combinations.`);
+    category.items=raw.items.map((entry,index)=>{
+      assert(entry&&typeof entry==='object'&&!Array.isArray(entry),`${file}: combination ${index+1} in ${id} must be an object.`);
+      const item={sequence:text(entry.sequence,'sequence',file,80),title:text(entry.title,'combination title',file,100),spoken:text(entry.spoken,'spoken label',file,120),note:text(entry.note,'combination note',file,300)};
+      assert(!/\s/.test(item.sequence)&&Array.from(item.sequence).length<=24,`${file}: combination sequences must be short and contain no spaces.`);
+      assert(!sequences.has(item.sequence),`${file}: duplicate sequence ${item.sequence}.`);sequences.add(item.sequence);
+      assert(Array.isArray(entry.keywords)&&entry.keywords.length<=20,`${file}: keywords must be a list of at most 20 items.`);
+      item.keywords=entry.keywords.map(x=>text(x,'keyword',file,80));
+      total++;
+      return item;
+    });
+    return category;
+  });
+  assert(total>=40&&total<=60,`${file}: start with 40–60 curated combinations; found ${total}.`);
+  assert(Array.isArray(data.faqs)&&data.faqs.length>=3&&data.faqs.length<=8,`${file}: provide 3–8 useful visible FAQs.`);
+  const faqs=data.faqs.map((faq,index)=>{
+    assert(faq&&typeof faq==='object'&&!Array.isArray(faq),`${file}: FAQ ${index+1} must be an object.`);
+    return {question:text(faq.question,'FAQ question',file,180),answer:text(faq.answer,'FAQ answer',file,500)};
+  });
+  const url='/emoji-combinations/';
+  const jumps=categories.map(c=>`<a href="#combo-${esc(c.id)}" data-combo-jump="${esc(c.id)}">${esc(c.title)}</a>`).join('');
+  const filters=`<button class="combo-filter" type="button" data-combo-filter="all" aria-pressed="true">All ${total}</button>`+categories.map(c=>`<button class="combo-filter" type="button" data-combo-filter="${esc(c.id)}" aria-pressed="false">${esc(c.title)} (${c.items.length})</button>`).join('');
+  const sections=categories.map(c=>`<section class="combo-category" id="combo-${esc(c.id)}" data-combo-section="${esc(c.id)}" aria-labelledby="combo-heading-${esc(c.id)}"><div class="combo-category__head"><h2 id="combo-heading-${esc(c.id)}">${esc(c.title)}</h2><p class="combo-category__description">${esc(c.description)}</p></div><ul class="combo-grid">${c.items.map(item=>{
+    const search=[item.sequence,item.title,item.spoken,item.note,c.title,...item.keywords].join(' ');
+    return `<li class="combo-card" data-combo-item data-search="${esc(search)}"><div class="combo-card__top"><span class="combo-sequence" role="img" aria-label="${esc(item.spoken)}">${esc(item.sequence)}</span><button class="btn btn-sm btn-primary combo-copy" type="button" data-copy-text="${esc(item.sequence)}" aria-label="Copy ${esc(item.spoken)} emoji combination" disabled>Copy</button></div><h3>${esc(item.title)}</h3><p class="combo-card__note">${esc(item.note)}</p></li>`;
+  }).join('')}</ul></section>`).join('');
+  const faqHTML=faqs.map(f=>`<details><summary>${esc(f.question)}</summary><p>${esc(f.answer)}</p></details>`).join('');
+  const $=cleanHTML(base);
+  $('nav.meanings-nav a[href="/guides/"]').removeAttr('aria-current');
+  $('main').html(`<div class="wrap combo-page" data-combo-app><nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true"> › </span><span aria-current="page">Emoji combinations</span></nav><header class="combo-hero"><p class="meaning-eyebrow">Ready-made sequences</p><h1>${esc(title)}</h1><p class="combo-hero__lede">${esc(intro)}</p><p class="combo-hero__hint">Emoji choices can be read differently from one chat to another. Add words when clarity matters.</p></header><nav class="combo-jump" aria-label="Jump to a combination category">${jumps}</nav><div class="combo-controls" data-combo-controls hidden><div class="combo-search-row"><div><label class="combo-search-label" for="combo-search">Search combinations</label><input class="combo-search-input" id="combo-search" type="search" autocomplete="off" spellcheck="false" placeholder="Try cute, birthday, moon or an emoji" aria-describedby="combo-search-help"></div><button class="btn btn-sm" id="combo-clear" type="button">Clear filters</button></div><span class="sr-only" id="combo-search-help">Search the static list by emoji, theme or description.</span><div class="combo-filters" role="group" aria-label="Filter combinations by category">${filters}</div><p class="combo-result-count" id="combo-result-count" role="status" aria-live="polite" aria-atomic="true"></p></div><p class="combo-empty" id="combo-no-results" hidden>No combinations match that search. Try another word or clear the filters.</p><noscript><p class="combo-no-script">Search, filters and one-tap Copy use JavaScript. The full list remains visible below; select a sequence and use your device’s Copy command if needed.</p></noscript>${sections}<section class="combo-howto" aria-labelledby="combo-howto-heading"><h2 id="combo-howto-heading">How to copy and paste</h2><ol><li>Choose a combination and tap <strong>Copy</strong>.</li><li>Open your caption, bio or message field and paste the sequence.</li><li>Add your own words if the meaning needs more context.</li></ol></section><section class="combo-faq" aria-labelledby="combo-faq-heading"><h2 id="combo-faq-heading">Emoji combinations: common questions</h2><div class="combo-faq__list">${faqHTML}</div></section><aside class="guide-callout combo-related"><h2>Keep exploring</h2><p>See <a href="/guides/whatsapp-love-emojis/">love emojis for WhatsApp</a>, browse the <a href="/smileys-emotion/heart/">heart emoji collection</a>, or read more <a href="/guides/">EmojiSpot guides</a>.</p><p>Free to use, with no account or signup. Search and filters run on this page; no combination data is sent to a server.</p></aside></div>`);
+  const pageLD={'@context':'https://schema.org','@type':'WebPage',name:title,description,url:SITE+url,inLanguage:'en',isPartOf:{'@type':'WebSite',name:'EmojiSpot',url:SITE+'/'}};
+  const breadcrumbLD={'@context':'https://schema.org','@type':'BreadcrumbList',itemListElement:[{'@type':'ListItem',position:1,name:'Home',item:SITE+'/'},{'@type':'ListItem',position:2,name:'Emoji combinations',item:SITE+url}]};
+  metadata($,seoTitle,description,url,[pageLD,breadcrumbLD]);
+  $('link[rel="alternate"][type="application/rss+xml"]').remove();
+  $('head').append('<link rel="stylesheet" href="/assets/css/emoji-combinations.css">');
+  $('body').append('<script data-cfasync="false" defer src="/assets/js/emoji-combinations.js"></script>');
+  return $.html();
+}
 function build() {
   const started=Date.now();
   assert(fs.existsSync(path.join(ROOT,'guides/index.html')),'Missing current Guides directory. Install on the current EmojiSpot repository, not an empty folder.');
@@ -194,6 +246,8 @@ function build() {
     }
   }
   const generated=[];
+  const combinationRel='emoji-combinations/index.html';
+  write(combinationRel,combinationPage(read('guides/index.html')));generated.push(combinationRel);
   for(const p of posts){const rel='guides/'+p.slug+'/index.html';write(rel,article(p,base,all));generated.push(rel);}
   const pages=Math.max(1,Math.ceil(all.length/PAGE_SIZE)); const indexURLs=[];
   for(let n=1;n<=pages;n++) {
@@ -224,10 +278,10 @@ function build() {
   const feed=`<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"><channel><title>EmojiSpot Guides</title><link>${SITE}/guides/</link><description>Emoji explanations and practical message examples.</description><language>en</language>${all.slice(0,30).map(p=>`<item><title>${esc(p.title)}</title><link>${SITE+p.url}</link><guid isPermaLink="true">${SITE+p.url}</guid><description>${esc(p.description)}</description>${p.date?`<pubDate>${new Date(p.date).toUTCString()}</pubDate>`:''}</item>`).join('')}</channel></rss>`;write('guides/feed.xml',feed);
   let sitemap=read('sitemap.xml');const locs=[...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m=>m[1]);
   assert(locs.length===new Set(locs).size,'Original sitemap contains duplicate URLs.');
-  const extra=[...posts.map(p=>p.url),...indexURLs].map(u=>SITE+u).filter(u=>!locs.includes(u));
+  const extra=[...posts.map(p=>p.url),...indexURLs,'/emoji-combinations/'].map(u=>SITE+u).filter(u=>!locs.includes(u));
   for(const u of extra) sitemap=sitemap.replace('</urlset>',`<url><loc>${esc(u)}</loc></url>\n</urlset>`);
   // Preserve genuine existing lastmod values, except entry pages whose content this build changes.
-  const changed=new Set(['/',...indexURLs,...backlinks.keys()].map(u=>SITE+u));
+  const changed=new Set(['/','/emoji-combinations/',...indexURLs,...backlinks.keys()].map(u=>SITE+u));
   sitemap=sitemap.replace(/<url>[\s\S]*?<\/url>/g,block=>changed.has(/<loc>([^<]+)<\/loc>/.exec(block)?.[1])?block.replace(/\s*<lastmod>[^<]+<\/lastmod>/g,''):block);
   assert(locs.length+extra.length<=50000 && Buffer.byteLength(sitemap)<50*1024*1024,'Sitemap needs splitting before publication.');write('sitemap.xml',sitemap);
   write('assets/css/site.css',read('assets/css/site.css')+'\n/* Automatic editorial listings and article illustrations */\n.article-intro{font-size:16px;line-height:1.85}.article-intro p{margin:16px 0}.editorial-card + .editorial-card{margin-top:18px}.editorial-visual{flex-wrap:wrap;overflow-wrap:anywhere}.publisher-pagination{display:flex;gap:16px;align-items:center;justify-content:center;flex-wrap:wrap;margin-top:28px}.article-body ol,.article-end ul,.related-editorial ul{padding-inline-start:24px}.article-end li{margin-block:8px}.article-hero,.article-figure{margin:24px auto}.article-hero{max-width:980px}.article-hero img,.article-figure img{display:block;width:100%;max-width:100%;height:auto;border-radius:14px}.article-hero img{aspect-ratio:1200/630;object-fit:cover}.article-figure img{aspect-ratio:4/3;object-fit:cover}.article-hero figcaption,.article-figure figcaption{margin-top:8px;font-size:.9em;line-height:1.5;opacity:.82}\n');
@@ -258,7 +312,7 @@ function build() {
   write('sw.js',sw.replace(/const CACHE = '[^']+';/,`const CACHE = 'emoji-publisher-${digest}';`));
   // Replace generated output only after every validation succeeds.
   if(fs.existsSync(OUT))fs.rmSync(OUT,{recursive:true});fs.renameSync(STAGE,OUT);
-  const report={sourceFiles:sourceCount,deployedFiles:files.length,remainingFiles:MAX_FILES-files.length,existingGuides:legacy.length,publishedNewPosts:posts.length,guideListingPages:pages,sitemapURLs:locs.length+extra.length,generatedOrUpdatedHTML:[...new Set(generated)],cacheVersion:'emoji-publisher-'+digest,seconds:Math.round((Date.now()-started)/10)/100};
+  const report={sourceFiles:sourceCount,deployedFiles:files.length,remainingFiles:MAX_FILES-files.length,existingGuides:legacy.length,publishedNewPosts:posts.length,generatedStaticPages:['/emoji-combinations/'],guideListingPages:pages,sitemapURLs:locs.length+extra.length,generatedOrUpdatedHTML:[...new Set(generated)],cacheVersion:'emoji-publisher-'+digest,seconds:Math.round((Date.now()-started)/10)/100};
   fs.writeFileSync(path.join(ROOT,'.publisher-report.json'),JSON.stringify(report,null,2));
   console.log('EmojiSpot publishing build passed.');console.log(JSON.stringify(report,null,2));
   if(files.length>18000)console.warn('WARNING: fewer than 2,000 files remain within the free-plan limit.');
